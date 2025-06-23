@@ -1,0 +1,45 @@
+{
+    "name": "mskins",
+    "short_name": "mskins",
+    "description": "mskins开箱网-csgo饰品交易平台,高爆率盲盒游戏体验",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#191c34",
+    "icons": [
+		{
+            "src": "./logo.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+		{
+            "src": "./logo.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+		{
+            "src": "./logo.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+		{
+            "src": "./logo.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+		{
+            "src": "./logo.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+		{
+            "src": "./logo.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+		{
+            "src": "./logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

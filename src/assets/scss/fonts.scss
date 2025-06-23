@@ -1,0 +1,43 @@
+@font-face {
+	font-family: Roboto;
+	src: url(@/assets/fonts/Roboto-Medium-12.ttf);
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: Abel;
+	src: url(@/assets/fonts/Abel.ttf);
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: Muller;
+	src: url(@/assets/fonts/Muller-S.ttf);
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family:	D-DIN;
+	src: url(@/assets/fonts/D-DIN.ttf);
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Microsoft Yahei';
+	src: local("Hiragino Sans GB");
+}
+
+@font-face {
+	font-family: 'Microsoft Yahei UI';
+	src: local("Hiragino Sans GB");
+}
+
+@font-face {
+	font-family: "Flama";
+	src: url('../fonts/flama.woff2?t=1696508456190') format('woff2'),
+			//  url('../fonts/flama.woff?t=1696508456190') format('woff');
+}

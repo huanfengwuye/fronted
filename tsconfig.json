@@ -1,0 +1,40 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"strict": true,
+		"jsx": "preserve",
+		"importHelpers": true,
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"allowJs": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true,
+		"baseUrl": ".",
+		"outDir": "./dist",
+		"paths": {
+			"tslib" : ["node_modules/tslib/tslib.d.ts"],
+			"@/*": [
+				"src/*"
+			]
+		},
+		"lib": [
+			"esnext",
+			"dom",
+			"dom.iterable",
+			"scripthost"
+		],
+		"types": [  "vite/client" ]
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"src/**/*.vue",
+		"shime-vue.d.ts",
+		"shime-tsx.d.ts",
+	],
+	"exclude": [
+		"node_modules"
+	]
+}

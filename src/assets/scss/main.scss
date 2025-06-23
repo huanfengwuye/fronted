@@ -1,0 +1,60 @@
+/* @import "./base.css"; */
+* {
+	margin: 0;
+	padding: 0;
+	/* font-family: 微软雅黑,'微软雅黑','Microsoft Yahei','Microsoft Yahei UI'; */
+	font-family: Flama, '微软雅黑', Microsoft Yahei, -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Segoe UI, Arial, Roboto, PingFang SC, miui, Hiragino Sans GB, sans-serif;
+ 
+	image-rendering: -moz-crisp-edges;
+	/* Firefox */
+	image-rendering: -o-crisp-edges;
+	/* Opera */
+	image-rendering: -webkit-optimize-contrast;
+	/* Webkit (non-standard naming) */
+	image-rendering: crisp-edges;
+	-ms-interpolation-mode: nearest-neighbor;
+}
+
+/* 隐藏鼠标点击这些元素时出现的光标 */
+/* div, span, p, input {
+	caret-color: transparent;
+} */
+
+:root {
+	--van-switch-size: 14PX;
+	--van-switch-width: 46PX;
+	--van-switch-height: 24PX; 
+	--van-switch-background-color: #1E213B;
+	--van-switch-on-background-color: #2ae1bc;
+	/* --van-switch-border: 17px solid #1E213B; */
+}
+
+/* 文本省略号 */
+.text-cut
+{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	word-break: break-all;
+	white-space: nowrap;
+	width: 100%;
+}
+
+.pc-icon {
+	font-size: 22px !important;
+	margin-right: 8px;
+}
+
+.pc-icon-16 {
+	font-size: 16px !important;
+	margin-right: 3px;
+}
+
+.title {
+	width: 309px;
+	height: 47px;
+	margin: 0 auto 20px;
+	line-height: 47px;
+	text-align: left;
+	color: #fff;	
+	font-size: 40px;
+}

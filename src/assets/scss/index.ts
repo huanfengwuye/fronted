@@ -1,0 +1,12 @@
+//px转rem
+import 'lib-flexible'
+import 'vant/lib/index.css'
+import 'swiper/css'
+import '@/assets/scss/animation.scss'
+import '@/assets/scss/fonts.scss'
+import '@/assets/scss/main.scss'
+import '@/assets/scss/quill.snow.scss'
+import '@/assets/scss/iconfont.scss?v=2.28'
+import 'element-plus/dist/index.css'
+import '@/assets/scss/h5.scss'
+import '@/assets/scss/pc.scss'
