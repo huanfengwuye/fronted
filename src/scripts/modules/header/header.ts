@@ -188,9 +188,16 @@ export default class Header extends Vue
 		})
 	}
 
-	public onClickSign()
+	public onClickSign(type: string)
 	{
+		if(type=='1'){
+			this.store.commit( "setSignViewTab", 'login' )
+
+		}else {
+			this.store.commit( "setSignViewTab", 'register' )
+		}
 		this.store.commit( "setSignView", true )
+		// this.store.commit( "setSignView", true )
 	}
 
 	///	h5登陆

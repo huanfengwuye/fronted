@@ -27,6 +27,7 @@ const rollId = Number(route.query.rollId);
 const store = useStore();
 const rollInfo = ref({});
 const tabType = ref(0); //0奖池，1参与人员，2获奖名单
+const tabnavType = ref(0);
 const passwordShow = ref(false); //密码加入
 const password = ref(""); //密码
 
@@ -331,7 +332,7 @@ function closeQRCode()
 
 <template>
 	<div id="pc-roll-details" class="min-wrap-height">
-		<div class="pc-tabs">
+		<div class="pc-tabs" v-if="false">
 			<div class="tab-item" @click="onClickRollTab(1)">
 				<svg class="icon">
 					<use xlink:href="@/assets/fonts/icon.svg#gifts"></use></svg>
@@ -349,7 +350,7 @@ function closeQRCode()
 
 		<div class="roll-wrap">
 			<div class="roll-details-info">
-				<div class="roll-left">
+				<div class="roll-left" v-if="false">
 					<div class="roll-head" v-if="rollInfo.rollType == 1">
 						<img src="@/assets/pcimg/roll/anc_head.png" alt="" />
 						<div>{{ t( 'battle.officialRoom' ) }}</div>
@@ -365,11 +366,39 @@ function closeQRCode()
 					</div>
 				</div>
 				<div class="roll-right">
-					<div class="info-name hide">{{ rollInfo.rollName }}</div>
+					<div class="info-name">{{ rollInfo.rollName }}</div>
+					<div class="bottom-info">
+						<div class="info-item" v-if="false">
+							<img src="@/assets/pcimg/roll/door.png" alt="" />
+							<p>{{ t( 'battle.roomId' ) }}:{{ rollInfo.id }}</p>
+							<svg class="icon-copy" @click="onClickCopy">
+								<use xlink:href="@/assets/fonts/icon.svg#copy"></use>
+							</svg>
+						</div>
+						<div class="info-item">
+							<img src="@/assets/pcimg/roll/time.png" alt="" />
+							<p>{{ t( 'battle.startTime' ) }}:{{ rollInfo.startTime }}</p>
+						</div>
+						<div class="info-item">
+							<img src="@/assets/pcimg/roll/time.png" alt="" />
+							<p>{{ t( 'battle.endTime' ) }}:{{ rollInfo.endTime }}</p>
+						</div>
+					</div>
+					<div class="roll-img">
+						<div class="roll-head" v-if="rollInfo.rollType == 1">
+							<img src="@/assets/pcimg/roll/anc_head.png" alt="" />
+							<div class="anchor">{{ t( 'battle.officialRoom' ) }}</div>
+						</div>
+						<div class="roll-head" v-if="rollInfo.rollType == 2">
+
+							<img src="@/assets/pcimg/roll/off_head.png" alt="" v-if="!rollInfo.anchorUser"/>
+							<img :src="rollInfo.anchorUser.avater" alt="" v-else/>
+							<div class="anchor">{{ t( 'battle.anchorRoom' ) }}</div>
+						</div>
+					</div>
 					<div class="details-rule">
 						<div class="details-rule-content" v-html="rollInfo.rollDesc"></div>
 					</div>
-
 					<div class="btn-group">
 						<div
 							v-show="rollInfo.inRoll && !rollInfo.isSettle"
@@ -392,24 +421,6 @@ function closeQRCode()
 						</div> -->
 					
 						<div v-show="rollInfo.isSettle" class="details-btn">{{ t( 'battle.finished' ) }}</div>
-					</div>
-
-					<div class="bottom-info">
-						<div class="info-item">
-							<img src="@/assets/pcimg/roll/door.png" alt="" />
-							<p>{{ t( 'battle.roomId' ) }}:{{ rollInfo.id }}</p>
-							<svg class="icon-copy" @click="onClickCopy">
-								<use xlink:href="@/assets/fonts/icon.svg#copy"></use>
-							</svg>
-						</div>
-						<div class="info-item">
-							<img src="@/assets/pcimg/roll/time.png" alt="" />
-							<p>{{ t( 'battle.startTime' ) }}:{{ rollInfo.startTime }}</p>
-						</div>
-						<div class="info-item">
-							<img src="@/assets/pcimg/roll/time.png" alt="" />
-							<p>{{ t( 'battle.endTime' ) }}:{{ rollInfo.endTime }}</p>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -437,7 +448,7 @@ function closeQRCode()
 					{{ t( 'battle.rewardUsers' ) }}
 				</div>
 			</div>
-			<div class="roll-pool" v-if="winninglist.length > 0">
+			<div class="roll-pool" v-if="winninglist.length > 0&&false">
 				<div class="pool-header">
 					<div class="item">
 						<p>{{ t( 'battle.rewardRecord' ) }}</p>
@@ -450,7 +461,7 @@ function closeQRCode()
 						:key="index"
 					>
 						<div class="item-card award">
-							<div class="card-label">
+							<div class="card-label" v-if="false">
 								<!-- <p>饰品价格</p> -->
 								<span
 									><img
@@ -485,86 +496,101 @@ function closeQRCode()
 					{{ t( 'common.loadmore' ) }}
 				</div>
 			</div>
-			<div class="roll-pool">
-				<div class="pool-header">
-					<div class="item">
-						<p>{{ t( 'battle.goodsNameTitle' ) }}</p>
-						<span>{{ rollInfo.goodsNum }}</span>
+			<div class="roll-pool-box">
+				<div class="tab-wrap">
+					<div class="tab-item" :class="{ 'active': tabnavType == 0 }" @click="tabnavType = 0">
+						{{'包含奖品' }}
 					</div>
-					<div class="item line-item">
-						<p>{{ t( 'battle.priceTotal' ) }}：</p>
-						<!-- <img
-							class="pc-price-coin"
-							src="@/assets/pcimg/common/coin.png"
-							alt=""
-						/><span>{{ rollInfo.priceNum }}</span> -->
-						<Price
-							:currency="rollInfo.priceNum"
-							fontWeight="700"
-							color="#f9a328"
-							size="18"
-							
-						></Price>
+					<div class="tab-item" :class="{ 'active': tabnavType == 1 }" @click="tabnavType = 1">
+						{{ '参与用户' }}
+					</div>
+					<div class="num_box">
+						<div v-if="tabnavType==0">奖品件数：{{ rollInfo.goodsNum  }}</div>
+						<div v-else-if="tabnavType==1">参与人数：{{ rollInfo.userNum }}</div>
 					</div>
 				</div>
-				<div class="pool-items">
-					<div
-						class="pool-item"
-						v-for="(item, index) in goodslist"
-						:key="index"
-					>
-						<div class="item-card">
-							<div class="card-label">
-								<p>{{ t( 'battle.price' ) }}</p>
-								<span
-									><img
-										class="pc-price-coin"
-										src="@/assets/pcimg/common/coin.png"
-										alt=""
-									/>{{ item.price }}</span
+				<div class="roll-pool" v-if="tabnavType==0">
+					<div class="pool-header" v-if="false">
+						<div class="item">
+							<p>{{ t( 'battle.goodsNameTitle' ) }}</p>
+							<span>{{ rollInfo.goodsNum }}</span>
+						</div>
+						<div class="item line-item">
+							<p>{{ t( 'battle.priceTotal' ) }}：</p>
+							<!-- <img
+								class="pc-price-coin"
+								src="@/assets/pcimg/common/coin.png"
+								alt=""
+							/><span>{{ rollInfo.priceNum }}</span> -->
+							<Price
+								:currency="rollInfo.priceNum"
+								fontWeight="700"
+								color="#f9a328"
+								size="18"
+								
+							></Price>
+						</div>
+					</div>
+					<div class="pool-items" >
+						<div
+							class="pool-item"
+							v-for="(item, index) in goodslist"
+							:key="index"
+						>
+							<div class="item-card">
+								<div class="card-label" v-if="false">
+									<p>{{ t( 'battle.price' ) }}</p>
+									<span
+										><img
+											class="pc-price-coin"
+											src="@/assets/pcimg/common/coin.png"
+											alt=""
+										/>{{ item.price }}</span
+									>
+								</div>
+								<div>{{ item.goodsType }}</div>
+								<div
+									class="weapon-item-pic"
+									:style="`background-image: url(` + getImageBg(item) + `)`"
 								>
-							</div>
-							<div
-								class="weapon-item-pic"
-								:style="`background-image: url(` + getImageBg(item) + `)`"
-							>
-								<img :src="getImageIcon(item)" :alt="item.goodsName" />
-							</div>
-							<div class="item-info">
-								<p class="item-info1">{{ getGoodsNamePre(item.goodsName) }}</p>
-								<p class="item-info2">
-									{{ getGoodsNameSec(item.goodsName, item.goodsType) }}
-								</p>
+									<img :src="getImageIcon(item)" :alt="item.goodsName" />
+								</div>
+								<div class="item-info">
+									<p class="item-info1">{{ getGoodsNamePre(item.goodsName) }}</p>
+									<p class="item-info2">
+										{{ getGoodsNameSec(item.goodsName, item.goodsType) }}
+									</p>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="btn-more" v-if="!goodsFinished" @click="onGoodsLoad">
-					{{ t( 'common.loadmore' ) }}
-				</div>
-			</div>
-			<div class="roll-pool">
-				<div class="pool-header">
-					<div class="item">
-						<p>{{ t( 'battle.participant' ) }}</p>
-						<span>{{ rollInfo.userNum }}</span>
+					<div class="btn-more" v-if="!goodsFinished" @click="onGoodsLoad">
+						{{ t( 'common.loadmore' ) }}
 					</div>
 				</div>
-				<div class="pool-players">
-					<div
-						class="pool-player"
-						v-for="(item, index) in userlist"
-						:key="index"
-					>
-						<Avatar
-							:userModel="item"
-							:size="'pc-roll-player'"
-							:hide-frame="true"
-						></Avatar>
+				<div class="roll-pool" v-else-if="tabnavType==1">
+					<div class="pool-header" v-if="false">
+						<div class="item">
+							<p>{{ t( 'battle.participant' ) }}</p>
+							<span>{{ rollInfo.userNum }}</span>
+						</div>
 					</div>
-				</div>
-				<div class="btn-more" v-if="!userFinished" @click="onUserLoad">
-					{{ t( 'common.loadmore' ) }}
+					<div class="pool-players">
+						<div
+							class="pool-player"
+							v-for="(item, index) in userlist"
+							:key="index"
+						>
+							<Avatar
+								:userModel="item"
+								:size="'pc-roll-player'"
+								:hide-frame="true"
+							></Avatar>
+						</div>
+					</div>
+					<div class="btn-more" v-if="!userFinished" @click="onUserLoad">
+						{{ t( 'common.loadmore' ) }}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -587,7 +613,8 @@ function closeQRCode()
 	width: 100%;
 	padding-bottom: 30px;
 	width: 100%;
-
+	border-top: 1px solid transparent;
+	background: url(@/assets/pcimg/roll/roll_bg.png) center center/100% 100%;
 	.pc-tabs {
 		background-color: #111324;
 		font-size: 16px;
@@ -639,70 +666,39 @@ function closeQRCode()
 		max-width: 1440px;
 		box-sizing: border-box;
 		margin: 40px auto 0;
+		background: url(@/assets/pcimg/roll/Roll_room_bg.webp) no-repeat center center/100% 100%;
+		display: flex;
+		padding: 100px 61px 15px;
+
 	}
 
 	.roll-details-info {
 		position: relative;
 		display: flex;
+		flex-direction: column;
 		max-width: 1440px;
-		width: 100%;
+		width: 245px;
 		height: 334px;
 		align-items: flex-start;
-		border: 1px solid #2d2d67;
-		background: #15172c;
-		box-shadow: 0px 0px 59px 1px rgba(41, 34, 139, 0.15) inset;
+		// border: 1px solid #2d2d67;
+		// background: #15172c;
+		// box-shadow: 0px 0px 59px 1px rgba(41, 34, 139, 0.15) inset;
 		box-sizing: border-box;
+		flex-shrink: 0;
 
 		.roll-left {
 			display: flex;
-			width: 300px;
+			// width: 300px;
 			height: 100%;
 			padding: 40px 30px;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			background: #1a1d37;
+			// background: #1a1d37;
 			box-sizing: border-box;
 			position: relative;
 
-			.roll-head {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				position: relative;
-				background: url(@/assets/pcimg/roll/head_bg.png) no-repeat center;
-				background-size: 100% 100%;
-				width: 300px;
-				height: 334px;
-
-				img {
-					width: 100px;
-					height: 100px;
-					margin-top: 50px;
-					border-radius: 12px;
-				}
-
-				div {
-					display: flex;
-					width: 100px;
-					height: 30px;
-					justify-content: center;
-					align-items: center;
-					border-radius: 10px;
-					background: #cb8928;
-					position: absolute;
-					top: 142px;
-					color: #fff;
-					font-size: 12px;
-					line-height: 19.5px;
-					box-sizing: border-box;
-				}
-
-				.anchor {
-					background: #7349ca;
-				}
-			}
-
+			
 			.roll-state {
 				display: flex;
 				height: 44px;
@@ -723,20 +719,24 @@ function closeQRCode()
 		.roll-right {
 			display: flex;
 			height: 100%;
-			padding: 45px;
+			// padding: 45px;
+			padding: 20px 20px 20px 15px;
+			box-sizing: border-box;
 			flex-direction: column;
 			align-items: flex-start;
 			box-sizing: border-box;
-			flex: 1;
+			width: 100%;
 			position: relative;
-
 			.info-name {
+				width: 100%;
 				color: #5562e2;
-				font-size: 38.4px;
+				font-size: 22px;
 				font-style: normal;
-				font-weight: 400;
 				line-height: 46px;
 				max-width: 1000px;
+				flex-shrink: 0;
+				font-weight: bold;
+				text-align: center;
 			}
 
 			.details-rule {
@@ -748,7 +748,17 @@ function closeQRCode()
 				.details-rule-content {
 					width: 100%;
 					color: #fff;
-					font-size: 19.2px;
+					font-size: 14x;
+					width: 100%;
+					background-color: rgb(235, 220, 209);
+					padding: 20px 15px;
+					border-radius: 6px;
+					margin-bottom: 15px;
+					color: rgb(66, 43, 32);
+					font-weight: 600;
+					overflow-y: auto;
+					box-sizing: border-box;
+					max-height:100px;
 				}
 			}
 
@@ -770,7 +780,8 @@ function closeQRCode()
 					font-weight: 700;
 					margin-top: 20px;
 					border-radius: 4px;
-					background: #3a33ac;
+					// background: #3a33ac;
+					background: url(@/assets/pcimg/activity/openbox_openBtn_bg.webp) no-repeat center center / 100% 100%;
 				}
 
 				.reserve
@@ -791,10 +802,11 @@ function closeQRCode()
 			}
 
 			.bottom-info {
-				position: absolute;
+				// position: absolute;
 				display: flex;
-				bottom: 45px;
-
+				// bottom: 45px;
+				flex-direction: column;
+				margin-bottom: 20px;
 				.info-item {
 					display: flex;
 					align-items: center;
@@ -822,10 +834,175 @@ function closeQRCode()
 					}
 				}
 			}
+			.roll-img{
+				width: 90px;
+				height: 90px;
+				border-radius: 50%;
+				overflow: hidden;
+				margin:  0 auto;
+				flex-shrink: 0;
+				.roll-head {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				position: relative;
+				background: url(@/assets/pcimg/roll/head_bg.png) no-repeat center;
+				background-size: 100% 100%;
+				// width: 300px;
+				// height: 334px;
+				height: 100%;
+
+				img {
+					width: 100%;
+					height: 100%;
+					// margin-top: 50px;
+					// border-radius: 12px;
+				}
+
+				div {
+					display: flex;
+					width: 100px;
+					height: 30px;
+					justify-content: center;
+					align-items: center;
+					border-radius: 10px;
+					background: #cb8928;
+					position: absolute;
+					top: 142px;
+					color: #fff;
+					font-size: 12px;
+					line-height: 19.5px;
+					box-sizing: border-box;
+				}
+
+				.anchor {
+					position: absolute;
+					top: 0;
+					right: 0px;
+					background: #7349ca;
+				}
+			}
+
+			}
 		}
 	}
+	.roll-pool-box{
+		padding: 20px 20px 20px 45px;
+		flex: 1;
+		.tab-wrap {
+			display: flex;
+			align-items: center;
+			position: relative;
+			// height: 96px;
+			margin-bottom: 20px;
 
+			.tab-item {
+				width: 140px;
+				height: 26px;
+				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 16px;
+				font-weight: bold;
+				color: #EFEDEB;
+				background: none;
+				cursor: pointer;
+				// border-bottom: 1px solid #0D0E1A;
+				background: url(@/assets/pcimg/activity/boxlist_tab_bg.webp) no-repeat center center / 100% 100%;
+				&:hover
+				{
+					// border-bottom: 1px solid #4638AD;
+				}
+
+				img {
+					width: 28px;
+					height: 25px;
+					margin-right: 10px;
+				}
+
+				.icon-active {
+					display: none;
+				}
+
+				.icon-common {
+					display: block;
+				}
+
+				&.active {
+					color: #fff;
+					// border-bottom: 1px solid #4638AD;
+					background: url(@/assets/pcimg/activity/boxlist_tab_active_bg.webp) no-repeat center center / 100% 100%;
+
+					.icon-active {
+						display: block;
+					}
+
+					.icon-common {
+						display: none;
+					}
+
+				}
+			}
+
+			.fliter-tab {
+				display: flex;
+				align-items: center;
+				margin-left: 36px;
+
+				.fliter-item {
+					width: 96px;
+					height: 40px;
+					border: 1px solid #1E2037;
+					border-radius: 12px;
+					box-sizing: border-box;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 18px;
+					color: #545774;
+					cursor: pointer;
+					margin-right: 10px;
+
+					&:hover
+					{
+						border: 1px solid #434997;
+
+					}
+
+
+					&.active {
+						color: #fff;
+						border: 1px solid #434997;
+						-moz-box-shadow: 0px 0px 26px rgba($color: #29228B, $alpha: .25) inset;
+						-webkit-box-shadow: 0px 0px 26px rgba($color: #29228B, $alpha: .25) inset;
+						box-shadow: 0px 0px 26px rgba($color: #29228B, $alpha: .25) inset;
+
+					}
+				}
+			}
+			.num_box{
+				position: absolute;
+				top: 0px;
+				right: 70px;
+				font-size: 18px;
+				font-family: SourceHan;
+				font-weight: bold;
+				color: rgb(254, 241, 179);
+			}
+		}
+	}
 	.roll-pool {
+		height: 400px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		padding-right: 20px;
+		&::-webkit-scrollbar{
+			width: 6px;
+		}
+		&::-webkit-scrollbar-thumb{
+			background-color: #fab15c;
+		}
 		.pool-header {
 			display: flex;
 			font-size: 18px;
@@ -872,11 +1049,11 @@ function closeQRCode()
 			display: flex;
 			flex-wrap: wrap;
 			margin: -4px;
-
+			gap: 10px;
 			.pool-item {
 				padding: 4px;
-				flex: 0 0 12.5%;
-				max-width: 12.5%;
+				// flex: 0 0 12.5%;
+				// max-width: 12.5%;
 				box-sizing: border-box;
 
 				.item-card {
@@ -885,7 +1062,8 @@ function closeQRCode()
 					align-items: center;
 					text-align: center;
 					background-color: #1b1e38;
-					height: 260px;
+					width: 160px;
+					height: 150px;
 					.card-label {
 						display: flex;
 						flex-direction: column;
@@ -922,7 +1100,7 @@ function closeQRCode()
 						justify-content: center;
 						position: relative;
 						max-width: 100%;
-						height: 116px;
+						height: 78px;
 						background-size: contain;
 						background-position: center;
 						background-repeat: no-repeat;

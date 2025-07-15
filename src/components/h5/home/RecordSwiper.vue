@@ -317,14 +317,14 @@ function goToVip() {
 		box-sizing: border-box;
 		// margin: 20px auto;
 		width: 100%;
-		height: 324px;
+		height: 155px;
 		overflow: hidden;
 		.sub-container {
 			display: flex;
-
+			gap: 10px;
 			.swiper-slide {
-				width: 314px;
-				height: 324px;
+				width: 185px;
+				height: 155px;
 				// border-width: 0px 1px 0px 1px;
 				// border-style: solid;
 				border-image-source: linear-gradient(
@@ -381,8 +381,8 @@ function goToVip() {
 					overflow: hidden;
 
 					.swiper-pic {
-						width: 235px;
-						height: 232px;
+						width: 135px;
+						height: 132px;
 						margin: 0 auto;
 						display: flex;
 						justify-content: center;
@@ -398,8 +398,8 @@ function goToVip() {
 						display: flex;
 						flex-direction: column;
 						position: absolute;
-						bottom: 32px;
-						left: 40px;
+						bottom: 10px;
+						left: 10px;
 
 						.item-info1 {
 							font-size: 24px;

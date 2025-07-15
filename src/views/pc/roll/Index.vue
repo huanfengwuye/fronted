@@ -26,7 +26,10 @@ const rollState = ref({ text: t( 'battle.inProgress' ), id: 1 })
 const keyword = ref('')//搜索关键字
 
 const roomListRef = ref([]);
-
+const rollNamelist = ref([
+	{name: t( 'battle.allRoom' ), id: 1},
+	{name: t( 'battle.myRoom' ), id: 2},
+])
 onMounted( async () => {
 	await getRollRoom()
 })
@@ -179,8 +182,21 @@ function timeFilter(time) {
 		
 <template>
 	<div id="pc-roll" class="min-wrap-height">
+		<div class="pc-roll-list">
+			<div class="pc-roll-list-item-box" v-for="(item, index) in rollNamelist">
+				<div
+				:key="index" class="pc-roll-item" :class="{active: tabType ==item.id}" :style="`--itemIndex: ${ rollNamelist.length%2 == 0 ? Math.abs((rollNamelist.length/2-0.5) - index ): Math.abs(homoBox.length/2 - index )}`" @click="()=>{
+					tabType=item.id
+					onClickTab(item.id)
+				}">
+				<span class="item-icon"></span>
+				<span> {{ item.name }}</span>
+				</div>
+
+			</div>
+		</div>
 		<div class="pc-common-tabs">
-			<div class="tab-item" :class="{ 'active': tabType == 1 }" @click="onClickTab(1)">
+			<!-- <div class="tab-item" :class="{ 'active': tabType == 1 }" @click="onClickTab(1)">
 				<svg class="icon">
 					<use xlink:href="@/assets/fonts/icon.svg#gifts"></use>
 				</svg>{{ t( 'battle.allRoom' ) }}
@@ -193,7 +209,7 @@ function timeFilter(time) {
 					<use xlink:href="@/assets/fonts/icon.svg#gift-3"></use>
 				</svg>
 				{{ t( 'battle.myRoom' ) }}
-			</div>
+			</div> -->
 			<div class="header-right">
 				<input type="text" v-model="keyword" :placeholder="t( 'battle.searchByName' )" />
 				<div class="search-btn" @click="onClickSearch()">
@@ -262,21 +278,65 @@ function timeFilter(time) {
 <style lang="scss" scoped>
 #pc-roll {
 	box-sizing: border-box;
-	margin: 20px auto;
+	// margin: 20px auto;
+	padding-top: 40px;
 	width: 100%;
-
+	background: url(@/assets/pcimg/roll/roll_bg.png) center center/100% 100%;
+	.pc-roll-list{
+		position: absolute;
+		left: -400px;
+		z-index: 98;
+		width: 560px;
+		height: 526px;
+		background: url(@/assets/pcimg/activity/boxnameList_bg.webp) center center / 100% 100% no-repeat;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		justify-content: space-around;
+		padding: 160px 0;
+		box-sizing: border-box;
+		.pc-roll-list-item-box{
+			height: 47px;
+			width: 100%;
+			position: relative;
+		}
+		.pc-roll-item{
+			
+			position: absolute;
+			top: 0;
+			right: calc( -130px - var( --itemIndex )  * -45px);
+			width: 169px;
+			height: 47px;
+			border-radius:20px;
+			background: url(@/assets/pcimg/activity/name_item_bg.png) center center / 100% 100% no-repeat;
+			display: flex;
+			align-items: center;
+			padding-left: 9px;
+			font-size: 16px;
+			gap: 20px;
+			color: white;
+			&.active{
+				background: url(@/assets/pcimg/activity/name_item_active.png) center center / 100% 100% no-repeat;
+			}
+			.item-icon{
+				width: 33px;
+				height: 27px;
+				background: url(@/assets/pcimg/activity/nametitle_bg.png) center center / 100% 100% no-repeat;
+			}
+		}
+	}
 	.pc-common-tabs {
-		background-color: #111324;
+		// background-color: #111324;
 		font-size: 16px;
 		color: #fff;
 		display: flex;
-		height: 80px;
-		line-height: 80px;
+		height: 23px;
+		line-height: 23px;
 		align-items: center;
 		text-align: center;
 		justify-content: flex-start;
 		max-width: 1410px;
-		margin: 50px auto 0;
+		margin: 0 auto ;
 		box-sizing: border-box;
 		position: relative;
 
@@ -319,8 +379,8 @@ function timeFilter(time) {
 			position: absolute;
 			max-width: 714px;
 			// width: 100%;
-			width: calc( 100% - 600px );
-			background: #1F213C;
+			width: calc( 100% - 1200px );
+			// background: #1F213C;
 			box-sizing: border-box;
 			height: 100%;
 			top: 0;
@@ -329,17 +389,19 @@ function timeFilter(time) {
 			input {
 				width: 100%;
 				height: 100%;
-				padding-left: 30px;
-				padding-right: 70px;
+				padding-left: 10px;
+				padding-right: 10px;
 				border: 0;
-				font-size: 18px;
+				font-size: 12px;
 				font-weight: 300;
 				padding-top: 3px;
-				color: #bfc1d1;
 				outline: 0;
-				background-color: #1f213c;
+				background-color: #150c0e99;
 				box-sizing: border-box;
-
+				border-radius: 6px;
+				outline: none;
+				border: none;
+				color: rgb(144, 144, 144);
 				&::placeholder {
 					color: #676C90;
 				}
@@ -356,12 +418,12 @@ function timeFilter(time) {
 				transform: translateY(-50%);
 				cursor: pointer;
 				box-sizing: border-box;
-				width: 50px;
+				width: 20px;
 				height: 100%;
 
 				.icon-search {
-					width: 20px;
-					height: 20px;
+					width: 12px;
+					height: 12px;
 					display: inline-block;
 					vertical-align: middle;
 					fill: currentColor;
@@ -393,10 +455,10 @@ function timeFilter(time) {
 			width: 270px;
 			height: 383px;
 			padding: 1px 1px 16px 1px;
-			border: 1px solid #2D2D67;
-			background: #15172C;
-			box-shadow: 0px 0px 59px 1px rgba(41, 34, 139, 0.15) inset;
-
+			// border: 1px solid #2D2D67;
+			// background: #15172C;
+			// box-shadow: 0px 0px 59px 1px rgba(41, 34, 139, 0.15) inset;
+			background: url(@/assets/pcimg/roll/roll_backimg.png) no-repeat center center/100% 100%;
 			&.over
 			{
 				opacity: .3;
@@ -601,11 +663,12 @@ function timeFilter(time) {
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					width: 240px;
+					width: 140px;
 					height: 44px;
 					border-radius: 4px;
-					background: #4B56BC;
+					// background: #4B56BC;
 					margin-top: 6px;
+					background:url(@/assets/pcimg/activity/openbox_openBtn_bg.webp) no-repeat center center/100% 100%;
 					cursor: pointer;//鼠标变手
 					.icon {
 						display: inline-block;
@@ -631,7 +694,7 @@ function timeFilter(time) {
 				}
 
 				.award-time {
-					color: #8D91AE;
+					color: #ccc;
 					text-align: center;
 					font-family: MullerS;
 					font-size: 13px;

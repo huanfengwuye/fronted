@@ -789,7 +789,7 @@ export default
 		loginBtn 					: '登录',
 		toLoginBtn					: '去登录',
 		backAndLogin				: '返回登录',
-		registerBtn 				: '立即注册',
+		registerBtn 				: '注册',
 		modifyBtn					: '确认修改',
 		toRegister 					: '注册账号',
 		toRegisterText				: '还没有账号？立即注册>>>',

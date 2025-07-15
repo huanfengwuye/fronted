@@ -338,9 +338,9 @@ function changeLang( lang )
 
 <template>
 	<div id="pc-recordswiper" v-show="!isHide">
-		<div class="opt-wrap">
+		<!-- <div class="opt-wrap">
 			<div class="live-wrap">
-				<div class="live-txt">{{ t( 'menu.droppedBoxesTitle' ) }}</div>
+				<div class="live-txt">{{ t( 'menu.droppedBoxesTitle' ) }}</div> -->
 				<!-- <div class="lang-change">
 					<div @click="showLangMenu = true" class="cur-lang">
 						<label>{{ curLang }}</label>
@@ -353,7 +353,7 @@ function changeLang( lang )
 						>{{ item }}</div>
 					</div>
 				</div> -->
-				<div class="live-opt" @click="onClickSwitch">
+				<!-- <div class="live-opt" @click="onClickSwitch">
 				<svg class="icon-pause" v-if="!playRecord">
 					<use xlink:href="@/assets/fonts/icon.svg#play" ng-href="@/assets/fonts/icon.svg#play" class="ng-scope"></use>
 				</svg>
@@ -376,7 +376,7 @@ function changeLang( lang )
 				</div>
 
 			</div>
-		</div>
+		</div> -->
 		<div class="swiper-container" @mouseenter="onMouseenter" @mouseleave="onMouseleave">
 			<div class="sub-container">
 				<div :class="[ 'swiper-slide', init ? 'init-node' : '' ]" 
@@ -609,7 +609,8 @@ function changeLang( lang )
 	// flex: 1;
 	height: 162px;
 	// display: flex;
-	width: calc( 100% - 196px );
+	// width: calc( 100% - 196px );
+	width: 100%;
 	overflow: hidden;
 
 	.sub-container
@@ -670,6 +671,7 @@ function changeLang( lang )
 
 					&.lightblue
 					{
+						// background-image: url(./../../assets/img/realtime/lan.png);
 						background: radial-gradient(101.95% 157% at 50% -23%,rgba(98,195,236,.4) 0,rgba(58,172,197,.316) 31.63%,rgba(22,67,77,0) 100%),#21222b;
 					}
 
@@ -680,12 +682,16 @@ function changeLang( lang )
 
 					&.purple
 					{
-						background: radial-gradient(101.95% 157% at 50% -23%,rgba(130,78,242,.4) 0,rgba(109,39,197,.316) 31.63%,rgba(45,17,81,0) 100%),#21222b;
+						background-image: url(@/assets/pcimg/realtime/zi.webp);
+
+						
+						// background: radial-gradient(101.95% 157% at 50% -23%,rgba(130,78,242,.4) 0,rgba(109,39,197,.316) 31.63%,rgba(45,17,81,0) 100%),#21222b;
 					}
 
 					&.pink
 					{
-						background: radial-gradient(101.95% 157% at 50% -23%,rgba(238,58,101,.4) 0,rgba(207,38,89,.316) 31.63%,rgba(81,17,29,0) 100%),#21222b;
+						background-image: url(@/assets/pcimg/realtime/hong.webp);
+						// background: radial-gradient(101.95% 157% at 50% -23%,rgba(238,58,101,.4) 0,rgba(207,38,89,.316) 31.63%,rgba(81,17,29,0) 100%),#21222b;
 					}
 
 					&.grey
@@ -695,7 +701,8 @@ function changeLang( lang )
 
 					&.blue
 					{
-						background: radial-gradient(101.95% 157% at 50% -23%,rgba(58,86,238,.4) 0,rgba(15,44,198,.316) 31.63%,rgba(26,17,81,0) 100%),#21222b
+						background-image: url(@/assets/pcimg/realtime/bai.webp);
+						// background: radial-gradient(101.95% 157% at 50% -23%,rgba(58,86,238,.4) 0,rgba(15,44,198,.316) 31.63%,rgba(26,17,81,0) 100%),#21222b
 					}
 				}
 			}

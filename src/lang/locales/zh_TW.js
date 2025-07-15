@@ -761,7 +761,7 @@ export default
 		loginBtn 					: '登錄',
 		toLoginBtn					: '去登錄',
 		backAndLogin				: '返回登錄',
-		registerBtn 				: '立即注冊',
+		registerBtn 				: '注冊',
 		modifyBtn					: '確認修改',
 		toRegister 					: '注冊賬號',
 		toRegisterText				: '還沒有賬號？立即注冊>>>',

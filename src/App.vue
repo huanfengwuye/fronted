@@ -178,7 +178,6 @@ function viewChangeListener() {
 	store.commit("setPCClient", isPC);
 
 	let params = isPC && route.path.startsWith("/m/") ? { path : '/p/home' } : { path : '/m/home' }
-
 	if( route.query.code )
 		params.query = { code : route.query.code }
 

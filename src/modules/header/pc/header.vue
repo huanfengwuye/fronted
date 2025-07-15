@@ -15,11 +15,11 @@ export default class PCHeader extends Header {}
 			<div class="opt-wrap">
 				<div class="logo-wrap">
 					<div class="logo" @click="jump('/')">
-						<img src="@/assets/logo.png" alt="" />
+						<img src="@/assets/pcimg/activity/titleIcon.png" alt="" />
 					</div>
 				</div>
 				<div class="tab-list">
-					<div
+					<!-- <div
 						class="nav_item"
 						:class="{ active: $route.name == 'p_home' }"
 						@click="jump('/')"
@@ -35,7 +35,7 @@ export default class PCHeader extends Header {}
 							alt=""
 						/>
 						{{ t( 'menu.home' ) }}
-					</div>
+					</div> -->
 					<!-- <div
 						class="nav_item"
 						v-if="!store.state.beiAnExamine && store.state.moduleBattle"
@@ -62,7 +62,7 @@ export default class PCHeader extends Header {}
 						{{ t( 'menu.battle' ) }}
 						<sup>NEW</sup>
 					</div> -->
-					<div
+					<!-- <div
 						class="nav_item"
 						:class="{ active: $route.name == 'p_rank' }"
 						@click.stop="jump('/p/rank')"
@@ -191,7 +191,7 @@ export default class PCHeader extends Header {}
 							alt=""
 						/>
 						置换合约
-					</div>
+					</div> -->
 					<!-- <div
 						class="nav_item"
 						:class="{ active: $route.name == 'p_mall' }"
@@ -219,9 +219,11 @@ export default class PCHeader extends Header {}
 				:class="{ mini: isHome && isHide }"
 				:style="{ top: `${isHome && isHide ? 0 - top : 0}px` }"
 			>
-				<div class="login-wrap" @click="onClickSign" v-if="!hasLogin && !isHide">
-					<img src="@/assets/pcimg/home/user-login-icon.png" />
-					<span>{{ t( 'menu.signBtn' ) }}</span>
+				<div class="login-wrap" v-if="!hasLogin && !isHide">
+					<!-- <img src="@/assets/pcimg/home/user-login-icon.png" />
+					<span>{{ t( 'menu.signBtn' ) }}</span> -->
+					<div class="login_btn" @click="onClickSign('1')">登录</div>
+          			<div class="login2_btn" @click="onClickSign('2')">注册</div>
 				</div>
 
 				<div class="user-wrap" @click="setUserShow" v-else-if="hasLogin">
@@ -783,10 +785,11 @@ export default class PCHeader extends Header {}
 		// position: fixed;
 		width: 100%;
 		height: 92px;
-		background: #191c34;
+		// background: #191c34;
 		opacity: 1;
 		z-index: 90;
-
+		background: url(@/assets/pcimg/activity/bg_top.png) no-repeat 100% 100%;
+    	background-size: 100% auto; /* 以宽度为准铺满 */
 		&.active {
 			z-index: 99;
 		}
@@ -802,7 +805,7 @@ export default class PCHeader extends Header {}
 				align-items: center;
 				width: 196px;
 				height: 100%;
-				background: #101120;
+				// background: #101120;
 
 				.logo {
 					display: flex;
@@ -813,7 +816,8 @@ export default class PCHeader extends Header {}
 					width: 196px;
 
 					img {
-						width: 161px;
+						height: 100%;
+						// width: 161px;
 						// height: 72px;
 						// margin-right: 20px;
 					}
@@ -894,7 +898,7 @@ export default class PCHeader extends Header {}
 		right: 0;
 		z-index: 100;
 		height: 92px;
-		background: #191c34;
+		// background: #191c34;
 		padding-left: 24px;
 
 		&.mini {
@@ -917,26 +921,30 @@ export default class PCHeader extends Header {}
 			width: 231px;
 			color: #fff;
 			// background: url(@/assets/pcimg/home/login_bg.png) center no-repeat;
-			background: url(@/assets/pcimg/home/login-btn-bg-hover.png) center
-				no-repeat;
-			background-size: 100% 100%;
+			// background: url(@/assets/pcimg/home/login-btn-bg-hover.png) center
+			// 	no-repeat;
+			// background-size: 100% 100%;
 			opacity: 1;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			gap: 14px;
 
-			img {
-				width: 32px;
-				height: 32px;
+			.login_btn{
+				height: 35px;
+				width: 95px;
+				text-align: center;
+				line-height: 35px;
+				font-size: 21px;
+				background: url('@/assets/pcimg/activity/denlu.png') center center / 100% 100% no-repeat;
 			}
-
-			span {
-				font-size: 15px;
-			}
-
-			&:hover {
-				background: url(@/assets/pcimg/home/login-btn-bg.png) center no-repeat;
+			.login2_btn{
+				height: 35px;
+				width: 95px;
+				text-align: center;
+				line-height: 35px;
+				font-size: 21px;
+				background: url('@/assets/pcimg/activity/zhuce.png') center center / 100% 100% no-repeat;
 			}
 		}
 

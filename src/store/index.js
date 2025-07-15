@@ -5,6 +5,9 @@ import { verifyToken } from '@/network/api/login';
 import { getConfigList, getModuleList ,getArticleList,getGoodsBgImages } from '@/network/api/index';
 // import { getGoodsBgImages } from '@/network/api/third';
 import router from '../router'
+import bai from '@/assets/pcimg/realtime/bai.webp'
+import zi from '@/assets/pcimg/realtime/zi.webp'
+import hong from '@/assets/pcimg/realtime/hong.webp'
 
 const state = {
 	platformId: 1,//平台ID
@@ -86,6 +89,7 @@ const state = {
 
 
 	showSignView: false, //登录弹框
+	showSignType: 'login',
 	showSignViewTab: 1, //登录弹框
 	showRegisterView: false, //注册弹框
 	showForgetPWView: false, //忘记密码
@@ -1075,6 +1079,10 @@ const actions = {
 				}
 				list[item.type][item.goodsLevel] = item.image;
 			}
+			// console.log(list,'initGoodsBgList');
+			// list[1] = [bai,zi,hong]
+			// list[2] = [bai,zi,hong]
+			// list[3] = [bai,zi,hong]
 			store.commit('initGoodsBgList', list);
 		}
 	},

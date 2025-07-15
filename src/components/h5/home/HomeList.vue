@@ -291,6 +291,7 @@ onMounted(() => {
 
 <style lang="scss">
 #home {
+	background: url(@/assets/pcimg/activity/h5open_bg.webp) no-repeat center center / 100% 100%;
 	.Festival {
 	width: 220px;
 	height: 334px;
@@ -316,7 +317,7 @@ onMounted(() => {
 	min-height: 800px;
 	// overflow: hidden;
 	position: relative;
-	padding-top: 0px;
+	padding-top: 60px;
 	.home-list {
 	// &.active {
 	//	 margin-top: -76px;
@@ -570,20 +571,23 @@ onMounted(() => {
 
 	.title_bg {
 		width: 100%;
+		margin-bottom: 40px;
 		.title_c {
 		color: #fff;
 
 		box-sizing: border-box;
-		width: 100%;
-		height: 244px;
+		width: 70%;
+		margin: 0 auto;
+		height: 74px;
 		font-size: 36px;
 		font-weight: 400;
 		display: flex;
 		// justify-content: space-between;
 		justify-content: center;
 		align-items: center;
-		background: url(@/assets/romimg/home/heading-bg.png) no-repeat;
-		background-size: 288px 247px;
+		// background: url(@/assets/romimg/home/heading-bg.png) no-repeat;
+		background: url(@/assets/pcimg/activity/name_bg.png) no-repeat center center/ 100% 100%;
+		// background-size: 288px 247px;
 		// background: url("@/assets/romimg/common/new-year-bg-h5.png");
 		// background-size: 100% 100%;
 		background-position: 0 0;
@@ -594,8 +598,8 @@ onMounted(() => {
 			margin-left: 10px;
 		}
 		}
-		height: 244px;
-		background: linear-gradient(180deg, #101120 0%, #121323 100%);
+		height: 74px;
+		// background: linear-gradient(180deg, #101120 0%, #121323 100%);
 	}
 
 	.spring-title {

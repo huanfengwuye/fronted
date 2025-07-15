@@ -2,25 +2,15 @@
 <template>
 	<div id="openbox" class="min-wrap-height">
 		<div class="open-layer" v-show="layer"></div>
-		<div class="top-header-wrap">
-			<div class="back-wrap">
-				<span class="icon iconfont" @click="back()">&#xe61e;</span>
+		<div class="openbox-btn">
+			<div class="back-wrap" @click="back()">
+				<img src="@/assets/pcimg/activity/goback.webp" alt="">
+				<span>返回</span>
 			</div>
-			<div class="box-name-wrap">
-				<!-- <p>{{ boxData.subTypeName }}</p> -->
-				<p>{{ boxData.name }}</p>
-
-				<div class="open-price">
-					<Price v-if="Number(boxData.price) < Number(boxData.originalPrice)" color="#75DC9E" font-weight="700" :currency="Number(boxData.price * boxNum).toFixed(2)"></Price>
-					<Price v-else color="#75DC9E" font-weight="700" :currency="(boxData.originalPrice * boxNum).toFixed(2)"></Price>
-					<!-- <p >
-						{{	 }}
-					</p>					${{ (boxData.price * boxNum).toFixed(2) }} -->
-				</div>
-			</div>
-			<div class="switch-container">
+			<div class="sound-switch" :class="{ 'active': !isAnimation }" @click="switchSound"></div>
+			<!-- <div class="switch-container"> -->
 				<!-- <span>{{ t('openbox.accelerate') }}</span> -->
-				<img
+				<!-- <img
 					v-if="!isAnimation"
 					src="@/assets/romimg/openbox/close.png"
 					alt=""
@@ -33,8 +23,24 @@
 					src="@/assets/romimg/openbox/open.png"
 					alt=""
 					srcset=""
-				/>
+				/> -->
+			<!-- </div> -->
+		</div>
+		<div class="top-header-wrap">
+			
+			<div class="box-name-wrap">
+				<!-- <p>{{ boxData.subTypeName }}</p> -->
+				<p>{{ boxData.name }}</p>
+
+				<div class="open-price" v-if="false">
+					<Price v-if="Number(boxData.price) < Number(boxData.originalPrice)" color="#75DC9E" font-weight="700" :currency="Number(boxData.price * boxNum).toFixed(2)"></Price>
+					<Price v-else color="#75DC9E" font-weight="700" :currency="(boxData.originalPrice * boxNum).toFixed(2)"></Price>
+					<!-- <p >
+						{{	 }}
+					</p>					${{ (boxData.price * boxNum).toFixed(2) }} -->
+				</div>
 			</div>
+			
 		</div>
 
 		<!-- <div class="title open-title">{{ boxData.name }}</div> -->
@@ -65,7 +71,14 @@
 
 		<div class="open-btn-box">
 			<div v-if="!doingAnimation" class="open-btn" @click="onClickOpen()">
-				{{ openText }}
+				<div class="open-price">
+					<Price v-if="Number(boxData.price) < Number(boxData.originalPrice)" color="#75DC9E" font-weight="700" :currency="Number(boxData.price * boxNum).toFixed(2)"></Price>
+					<Price v-else color="#75DC9E" font-weight="700" :currency="(boxData.originalPrice * boxNum).toFixed(2)"></Price>
+					<!-- <p >
+						{{	 }}
+					</p>					${{ (boxData.price * boxNum).toFixed(2) }} -->
+				</div>
+				<div>{{ openText }}</div>
 			</div>
 			<div class="open-btn open" v-if="doingAnimation">
 				OPENING
@@ -221,7 +234,42 @@
 	align-items: center;
 	box-sizing: border-box;
 	color: #fff;
-	background-color: #0d0e1c;
+	// background-color: #0d0e1c;
+	background: url(@/assets/pcimg/activity/h5open_bg.webp) no-repeat center center / 100% 100%;
+	.openbox-btn{
+		display: flex;
+		justify-content: space-between;
+		padding: 0px 20px;
+		width: 100%;
+		box-sizing: border-box;
+		.back-wrap{
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			font-size: 22px;
+			cursor: pointer;
+			font-family: Honglei;
+			color: #FFDFAD;
+			img{
+				width: 30px;
+				height: 30px;
+			}
+		}
+		.sound-switch {
+				width: 60px;
+				height: 60px;
+				background: url(@/assets/pcimg/activity/openvideo_bg.webp) no-repeat center;
+				background-size: 100% 100%;
+				// position: absolute;
+				// right:350px;
+				// top: 58px;
+				cursor: pointer;
+				&.active {
+					background: url(@/assets/pcimg/activity/closevideo_bg.webp) no-repeat center;
+					background-size: 100% 100%;
+				}
+			}
+	}
 	#recordswiper {
 		margin-top: 12px;
 	}
@@ -315,24 +363,29 @@
 		align-items: center;
 		box-sizing: border-box;
 		position: relative;
-		border-bottom: 2px solid #14162a;
-
-		.opt-btn {
-			width: 80px;
-			height: 140px;
-			margin: 0 12px;
-			text-align: center;
-			line-height: 140px;
-			font-size: 34px;
-			position: relative;
-			overflow: hidden;
-			color: #3a3958;
-
-			&.active {
-				color: #cfcee9;
-				border-bottom: 2px solid #3a34b0;
+		padding: 10px 0;
+		// border-bottom: 2px solid #14162a;
+		background: url(@/assets/pcimg/activity/h5openBox_opt_bg.webp) center center/ 100% 100% no-repeat;
+		gap: 10px;
+			.opt-btn {
+				width: 80px;
+				height: 60px;
+				border: none;
+				// margin: 0 17px;
+				text-align: center;
+				line-height: 60px;
+				font-size: 23px;
+				position: relative;
+				color: #fff;
+				font-family: 'MullerM';
+				cursor: pointer;
+				background-color: #0d0d0c;
+				&.active {
+					color: #CFCEE9;
+					border-bottom: 1px solid #3A34B0;
+					background: url(@/assets/pcimg/activity/checkNum_bg.webp) no-repeat center center / 100% 100%;
+				}
 			}
-		}
 	}
 
 	.open-price {
@@ -392,6 +445,11 @@
 			background: #3a34b0;
 			font-style: normal;
 			text-transform: uppercase;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 20px;
+			background: url(@/assets/pcimg/activity/openbox_openBtn_bg.webp) no-repeat center center/ 100% 100%;
 			&.open {
 				background-color: transparent;
 			}
@@ -402,8 +460,9 @@
 		padding: 50px;
 		box-sizing: border-box;
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
+		background: url(@/assets/pcimg/activity/h5openbox_title.webp) no-repeat center center / 100% 100%;
 		// padding: auto 20px;
 		.back-wrap {
 			width: 46px;

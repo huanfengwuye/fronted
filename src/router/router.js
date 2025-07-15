@@ -8,9 +8,9 @@ export default [
 		redirect: (to) => {
 			let isPC = isPCFunc();
 			if (!isPC) {
-				return { path: "/m/home" };
+				return { path: "/m/index" };
 			} else {
-				return { path: '/p/home' }
+				return { path: '/p/index' }
 			}
 		},
 	},
@@ -22,9 +22,17 @@ export default [
 	{
 		path: "/m",
 		name: "m_index",
-		redirect: "/m/home",
+		redirect: "/m/index",
 		component: () => import("../views/h5/container/Index.vue"),
 		children: [
+			{
+				path: 'index',
+				name: 'm_index_main',
+				component: () => import('../views/home/index.vue'),
+				meta: {
+					name: 'index'
+				}
+			},
 			{
 				path: "home",
 				name: "m_home",
@@ -619,9 +627,17 @@ export default [
 	{
 		path: '/p',
 		name: 'p_index',
-		redirect: '/p/home',
+		redirect: '/p/index',
 		component: () => import('../views/pc/container/Index.vue'),
 		children: [
+			{
+				path: 'index',
+				name: 'p_index_main',
+				component: () => import('../views/home/index.vue'),
+				meta: {
+					name: 'index'
+				}
+			},
 			{
 				path: 'home',
 				name: 'p_home',

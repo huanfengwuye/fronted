@@ -4,7 +4,8 @@ import Footer from '@/modules/footer/h5/footer.vue'
 // import mfooter from "@/components/h5/mfooter/Index.vue";
 import introduce from "@/components/h5/introduce/Index.vue";
 import sidebar from "@/components/h5/sidebar/Index.vue";
-import sign from "@/components/h5/login/Sign.vue";
+// import sign from "@/components/h5/login/Sign.vue";
+import Sign from '@/modules/sign/pc/sign.vue'
 import register from "@/components/h5/login/Register.vue";
 import forgetPW from "@/components/h5/login/ForgetPW.vue";
 import bindPhone from "@/components/h5/login/BindPhone.vue";
@@ -12,6 +13,7 @@ import BackToTop from "@/components/h5/common/BackToTop.vue";
 import PasswordRed from "@/components/h5/pwred/Index.vue";
 import RegRed from "@/components/h5/regred/Index.vue";
 import UpdateNotice from "@/views/h5/download/UpdateNotice.vue";
+import RecordSwiper from "@/components/h5/home/RecordSwiper.vue";
 // import ActivityDialog from "@/views/h5/activity/ActivityDialog.vue";
 import { onMounted, watch, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -28,7 +30,11 @@ const route = useRoute();
 const router = useRouter();
 const store = useStore();
 const showBrowserTip = ref( false )
-
+const showRecordSwiper = ref(true)
+const notshowRecordSwiperList = ['/m/home','/m/openbox']
+if(notshowRecordSwiperList.includes(route.path)){
+	showRecordSwiper.value = false
+}
 onMounted(() => {
 	window.$dev && console.log( 'weixin >>>>>>>>>>>>', isWechat(), route.name )
 	showBrowserTip.value = isWechat() && route.name !== 'm_reserve'
@@ -59,6 +65,11 @@ onMounted(() => {
 watch(route, (newRoute, oldRoute) => {
 	document.body.scrollTop = 0;
 	document.documentElement.scrollTop = 0;
+	if(notshowRecordSwiperList.includes(route.path)){
+		showRecordSwiper.value = false
+	}else {
+		showRecordSwiper.value = true
+	}
 });
 </script>
 
@@ -66,6 +77,7 @@ watch(route, (newRoute, oldRoute) => {
 	<div id="container">
 		<div v-if="showBrowserTip" class="wechat"></div>
 		<Header/>
+		<RecordSwiper v-if="showRecordSwiper" />
 		<router-view/>
 		<Footer/>
 		<introduce/>
@@ -78,6 +90,7 @@ watch(route, (newRoute, oldRoute) => {
 		<!-- <forgetPW /> -->
 		<bindPhone />
 		<UpdateNotice />
+		<Sign />
 		<ActivityDialog />
 		<ActivityMiniDialog />
 		<div

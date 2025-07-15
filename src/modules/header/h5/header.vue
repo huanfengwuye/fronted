@@ -14,7 +14,7 @@ export default class H5Header extends Header {}
 	>
 		<div class="header_top" :class="{ active: indexActive }">
 			<div class="opt-wrap">
-				<div class="nav-btn">
+				<div class="nav-btn" v-if="false">
 					<img
 						class="back"
 						v-if="isback()"
@@ -31,7 +31,7 @@ export default class H5Header extends Header {}
 				</div>
 				<div class="logo-wrap">
 					<div class="logo">
-						<img src="@/assets/logo.png" alt="" @click="jump('/')" />
+						<img src="@/assets/pcimg/activity/titleIcon.png" alt="" @click="jump('/')" />
 						<!-- {{
 							getTitle()
 						}} -->
@@ -39,9 +39,12 @@ export default class H5Header extends Header {}
 				</div>
 			</div>
 
-			<div class="login-wrap" v-show="!hasLogin" @click="onH5ClickSign">
-				<img src="@/assets/romimg/sign/login.png" alt="" srcset="" />
-				{{ t( 'router.login' ) }}
+			<div class="login-wrap" v-show="!hasLogin"  >
+				<!-- @click="onH5ClickSign" -->
+				<!-- <img src="@/assets/romimg/sign/login.png" alt="" srcset="" />
+				{{ t( 'router.login' ) }} -->
+				<div class="login_btn" @click="onClickSign('1')">登录</div>
+        		<div class="login2_btn" @click="onClickSign('2')">注册</div>
 			</div>
 
 			<div class="user-wrap" @click="setH5UserShow" v-show="hasLogin">
@@ -346,8 +349,7 @@ export default class H5Header extends Header {}
 
 <style lang="scss">
 #top-header {
-	background: rgba($color: #191c34, $alpha: 1);
-
+	// background: rgba($color: #191c34, $alpha: 1);
 	.check-bg{
 		display: flex;
 		justify-content: center;
@@ -675,10 +677,11 @@ export default class H5Header extends Header {}
 		position: fixed;
 		width: 100%;
 		height: 124px;
-		background: #191c34;
+		// background: #191c34;
 		opacity: 1;
 		padding-left: 20px;
-
+		background: url(@/assets/pcimg/activity/bg_top.png) no-repeat center center/100% 100%;
+    	// background-size: 100% auto; /* 以宽度为准铺满 */
 		left: 0;
 		top: 0;
 		z-index: 190;
@@ -740,9 +743,25 @@ export default class H5Header extends Header {}
 			font-size: 32px;
 			font-style: normal;
 			font-weight: 300;
-			border-bottom: 2px solid #373ab7;
-			background: #1f2447;
-
+			// border-bottom: 2px solid #373ab7;
+			// background: #1f2447;
+			.login_btn{
+				height: 35px;
+				width: 95px;
+				text-align: center;
+				line-height: 35px;
+				font-size: 21px;
+				margin-right: 10px;
+				background: url('@/assets/pcimg/activity/denlu.png') center center / 100% 100% no-repeat;
+			}
+			.login2_btn{
+				height: 35px;
+				width: 95px;
+				text-align: center;
+				line-height: 35px;
+				font-size: 21px;
+				background: url('@/assets/pcimg/activity/zhuce.png') center center / 100% 100% no-repeat;
+			}
 			img {
 				width: 64px;
 				height: 64px;

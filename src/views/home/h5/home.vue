@@ -1,8 +1,8 @@
 <script lang="ts" src="@/scripts/pages/home/home.ts"></script>
 <template>
 	<div class="home-wrap">
-		<div class="home-bg"></div>
-		<div class="home-top-wrap">
+		<div class="home-bg" v-if="false"></div>
+		<div class="home-top-wrap" v-if="false">
 			<H5RecordSwiper></H5RecordSwiper>
 			<H5Notice></H5Notice>
 			<!-- <TimeBoxSwiper></TimeBoxSwiper> -->

@@ -12,117 +12,147 @@
 		</van-overlay>
 
 		<div class="pc-openbox-content">
-			<div class="open-layer" v-show="layer"></div>
-			<div class="sound-switch" :class="{ 'active': !isAnimation }" @click="switchSound"></div>
-			<div class="box-info-wrap">
-				<div class="open-title">{{ boxData.name }}</div>
-				<div class="open-price" v-if="false"> <img class="pc-price-coin" src="@/assets/pcimg/common/coin.png"
-						alt="" />
-						{{ (boxData.price * boxNum).toFixed(2) }}</div>
-			</div>
-
-			<div class="box-back" v-show="!doingAnimation">
-				<div class="box-pic" :style="'background-image: url(' + boxData.imageUrl + ')'">
-					<img :src="boxData.weaponImageUrl" :alt="boxData.name">
+			<div class="left">
+				<div @click="back()" class="back">
+					<img src="@/assets/pcimg/activity/goback.webp" alt="">
+					<span>返回</span>
 				</div>
-			</div>
-			<div class="open-safe" v-show="!doingAnimation" @click="ensureShow = true">
-				<img src="@/assets/pcimg/openbox/safe.png"/>
-				<p>{{ t( 'openbox.ensureFairness' ) }}</p>
-			</div>
-			<OpenBoxMultAni v-if="doingAnimation" :goodsList="goodsList" @onAnimationEnd="onAnimationEnd"
-				@onRandEnd="onRandEnd" ref="animationyRef"></OpenBoxMultAni>
-			<div class="load-wrap" v-show="doingAnimation">OPENING <img src="@/assets/pcimg/openbox/loader.png" alt="" />
-			</div>
-
-			<div v-show="!doingAnimation" class="opt-content-wrap">
-				<div class="opt-wrap">
-					<div class="opt-btn" v-for="(item, index) in openArr" :key="index" :class="{ 'active': boxNum == item }"
-						@click="setBoxNum(item)">{{ item }}</div>
+				<div class="open-layer" v-show="layer"></div>
+				<div class="sound-switch" :class="{ 'active': !isAnimation }" @click="switchSound"></div>
+				<div class="box-info-wrap">
+					<div class="open-title">{{ boxData.name }}</div>
+					<div class="open-price" v-if="false"> <img class="pc-price-coin" src="@/assets/pcimg/common/coin.png"
+							alt="" />
+							{{ (boxData.price * boxNum).toFixed(2) }}</div>
 				</div>
-				<div class="open-price"> 
-					<!-- <img class="pc-price-open-pricecoin" src="@/assets/pcimg/common/coin.png" alt="" />
-					{{(boxData.price * boxNum).toFixed(2) }}&nbsp; -->
-					<Price
-						v-if="Number(boxData.price) < Number(boxData.originalPrice)"
-						size="20"
-						color="#75DC9E"
-						fontWeight="700"
-						:currency="(boxData.price * boxNum).toFixed(2)"
-					></Price>
-					<Price
-						v-else
-						size="20"
-						color="#75DC9E"
-						fontWeight="700"
-						:currency="(boxData.originalPrice * boxNum).toFixed(2)"
-					></Price>
-				</div>
-				<div class="open-btn-box" v-show="!doingAnimation">
-					<div class="open-btn" @click="onClickOpen()">{{ openText }}</div>
-					<div v-if="false" class="switch" :class="{ 'active': isAnimation }" @click="isAnimation = !isAnimation">
+	
+				<div class="box-back" v-show="!doingAnimation">
+					<div class="box-pic" :style="'background-image: url(' + boxData.imageUrl + ')'">
+						<img :src="boxData.weaponImageUrl" :alt="boxData.name">
 					</div>
 				</div>
-			</div>
-
-			<div class="column">
-				<div class="tab-wrap">
-					<div class="tab-item" :class="{ 'active': tabType == 0 }" @click="onClickTab(0)">
-						<img class="icon-common" src="@/assets/pcimg/openbox/icon_box.png" alt="" />
-						<img class="icon-active" src="@/assets/pcimg/openbox/icon_box2.png" alt="" />
-						{{ t( 'openbox.boxIncludes' ) }}
+				<div class="open-safe" v-show="!doingAnimation" @click="ensureShow = true">
+					<img src="@/assets/pcimg/openbox/safe.png"/>
+					<p>{{ t( 'openbox.ensureFairness' ) }}</p>
+				</div>
+				<OpenBoxMultAni v-if="doingAnimation" :goodsList="goodsList" @onAnimationEnd="onAnimationEnd"
+					@onRandEnd="onRandEnd" ref="animationyRef"></OpenBoxMultAni>
+				<div class="load-wrap" v-show="doingAnimation">OPENING <img src="@/assets/pcimg/openbox/loader.png" alt="" />
+				</div>
+	
+				<div v-show="!doingAnimation" class="opt-content-wrap">
+					<div class="opt-wrap">
+						<div class="opt-btn" v-for="(item, index) in openArr" :key="index" :class="{ 'active': boxNum == item }"
+							@click="setBoxNum(item)">x {{ item }}</div>
 					</div>
-					<div class="tab-item" :class="{ 'active': tabType == 1 }" @click="onClickTab(1)">
-						<img class="icon-common" src="@/assets/pcimg/openbox/icon_history.png" alt="" />
-						<img class="icon-active" src="@/assets/pcimg/openbox/icon_history2.png" alt="" />
-						{{ t( 'openbox.latestDrop' ) }}
-					</div>
-					<div class="fliter-tab" v-if="tabType == 1">
-						<div class="fliter-item" :class="{ 'active': !isAchorDrop }" @click="onClickFilterTab(false)">{{ t( 'battle.member' ) }}
+					<!-- <div class="open-price">  -->
+						<!-- <img class="pc-price-open-pricecoin" src="@/assets/pcimg/common/coin.png" alt="" />
+						{{(boxData.price * boxNum).toFixed(2) }}&nbsp; -->
+						<!-- <Price
+							v-if="Number(boxData.price) < Number(boxData.originalPrice)"
+							size="20"
+							color="#75DC9E"
+							fontWeight="700"
+							:currency="(boxData.price * boxNum).toFixed(2)"
+						></Price>
+						<Price
+							v-else
+							size="20"
+							color="#75DC9E"
+							fontWeight="700"
+							:currency="(boxData.originalPrice * boxNum).toFixed(2)"
+						></Price> -->
+					<!-- </div> -->
+					<div class="open-btn-box" v-show="!doingAnimation">
+						<div class="open-btn" @click="onClickOpen()">
+							<span>
+								<Price
+									v-if="Number(boxData.price) < Number(boxData.originalPrice)"
+									size="20"
+									color="#75DC9E"
+									fontWeight="700"
+									:currency="(boxData.price * boxNum).toFixed(2)"
+								></Price>
+								<Price
+									v-else
+									size="20"
+									color="#75DC9E"
+									fontWeight="700"
+									:currency="(boxData.originalPrice * boxNum).toFixed(2)"
+								></Price>
+							</span>
+							<span>
+								{{ openText }}
+							</span>
 						</div>
-						<div class="fliter-item" :class="{ 'active': isAchorDrop }" @click="onClickFilterTab(true)"> {{ t( 'battle.anchor' ) }}
+						<div v-if="false" class="switch" :class="{ 'active': isAnimation }" @click="isAnimation = !isAnimation">
 						</div>
 					</div>
-					<div class="presentation" v-if="tabType == 0">
-						<div class="probability_main">
-							<div class="probability_item" v-for="(item, index) in rarityList" :key="index">
-								 <div v-if="item.probability != 0">
-									<img :src="item.icon" alt="">
-									<p>{{ item.probability }}%</p>
-								 </div>
+				</div>
+
+			</div>
+			<div class="right">
+				<div class="open_List_box">
+					<div class="column">
+						<div class="tab-wrap">
+							<div class="tab-item" :class="{ 'active': tabType == 0 }" @click="onClickTab(0)">
+								<!-- <img class="icon-common" src="@/assets/pcimg/openbox/icon_box.png" alt="" />
+								<img class="icon-active" src="@/assets/pcimg/openbox/icon_box2.png" alt="" /> -->
+								{{ t( 'openbox.boxIncludes' ) }}
+							</div>
+							<div class="tab-item" :class="{ 'active': tabType == 1 }" @click="onClickTab(1)">
+								<!-- <img class="icon-common" src="@/assets/pcimg/openbox/icon_history.png" alt="" />
+								<img class="icon-active" src="@/assets/pcimg/openbox/icon_history2.png" alt="" /> -->
+								{{ t( 'openbox.latestDrop' ) }}
+							</div>
+							<div class="fliter-tab" v-if="tabType == 1">
+								<div class="fliter-item" :class="{ 'active': !isAchorDrop }" @click="onClickFilterTab(false)">{{ t( 'battle.member' ) }}
+								</div>
+								<div class="fliter-item" :class="{ 'active': isAchorDrop }" @click="onClickFilterTab(true)"> {{ t( 'battle.anchor' ) }}
+								</div>
+							</div>
+							<div class="presentation" v-if="tabType == 0">
+								<div class="probability_main">
+									<div class="probability_item" v-for="(item, index) in rarityList" :key="index">
+										 <div v-if="item.probability != 0">
+											<img :src="item.icon" alt="">
+											<p>{{ item.probability }}%</p>
+										 </div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-
-			<weaponListCpt :list="goodsList" v-show="tabType == 0"></weaponListCpt>
-
-			<div class="drop-wrap" v-show="tabType == 1">
-				<div class="drop-title">
-					<p class="area1">{{ t( 'common.users' ) }}</p>
-					<p class="area1">{{ t( 'battle.goodsName' ) }}</p>
-					<p class="area1">{{ t( 'battle.price' ) }}</p>
-					<p class="time">{{ t( 'openbox.time' ) }}</p>
-				</div>
-				<div class="drop-item" v-for="(item, index) in dropData" :key="index">
-					<div class="area1">
-						<Avatar :userModel='item' :size="'pc-openbox-header'" :hide-frame="true"></Avatar>
-						<p>{{ item.nickName }}</p>
+		
+					<weaponListCpt :list="goodsList" v-show="tabType == 0" class="box_item_list"></weaponListCpt>
+		
+					<div class="drop-wrap" v-show="tabType == 1" >
+						<div class="drop-title">
+							<p class="area1">{{ t( 'common.users' ) }}</p>
+							<p class="area1">{{ t( 'battle.goodsName' ) }}</p>
+							<p class="area1">{{ t( 'battle.price' ) }}</p>
+							<p class="time">{{ t( 'openbox.time' ) }}</p>
+						</div>
+						<div class="drop-item" v-for="(item, index) in dropData" :key="index">
+							<div class="area1">
+								<Avatar :userModel='item' :size="'pc-openbox-header'" :hide-frame="true"></Avatar>
+								<p>{{ item.nickName }}</p>
+							</div>
+							<div class="area2">{{ item.goodsName }}</div>
+							<div class="area3">
+								<!-- <img class="pc-price-coin" src="@/assets/pcimg/common/coin.png" alt="" />
+								{{ item.price }} -->
+								<Price
+									size="15"
+									color="#75DC9E"
+									fontWeight="700"
+									:currency="item.price"
+								></Price>
+							</div>
+		
+							<div class="time">{{ item.createTime }}</div>
+						</div>
 					</div>
-					<div class="area2">{{ item.goodsName }}</div>
-					<div class="area3">
-						<!-- <img class="pc-price-coin" src="@/assets/pcimg/common/coin.png" alt="" />
-						{{ item.price }} -->
-						<Price
-							size="15"
-							color="#75DC9E"
-							fontWeight="700"
-							:currency="item.price"
-						></Price>
-					</div>
-
-					<div class="time">{{ item.createTime }}</div>
 				</div>
 			</div>
 		</div>
@@ -191,14 +221,49 @@
 
 	.pc-openbox-content {
 		display: flex;
-		flex-direction: column;
-		align-items: center;
+		// flex-direction: column;
+		// align-items: center;
 		box-sizing: border-box;
 		color: #fff;
-		max-width: 1440px;
+		// max-width: 1440px;
 		width: 100%;
-		margin: 0 auto;
+		// margin: 0 auto;
+		background: url(@/assets/pcimg/activity/openbox_bg.webp) center center / 100% 100% no-repeat;
 		position: relative;
+		.left{
+			position: relative;
+			flex: 1;
+			.back{
+				cursor: pointer;
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				font-size: 19px;
+				line-height: 20px;
+				display: flex;
+				gap: 10px;
+				align-items: center;
+				font-family: Honglei;
+				color: #FFDFAD;
+				img{
+					width: 20px;
+					height: 20px;
+				}
+			}
+		}
+		.right{
+			width: 778px;
+			.open_List_box{
+				padding-top: 40px;
+				height: 467px;
+				overflow: auto;
+				background: url(@/assets/pcimg/activity/openlist_bg.webp) no-repeat center center/ 100% 100%;
+				.box_item_list{
+					height: calc( 100% - 60px);
+					overflow: auto
+				}
+			}
+		}
 	}
 
 	.open-layer {
@@ -216,11 +281,16 @@
 		top: 0;
 		left: 50%;
 		transform: translateX(-50%);
-
+		width: 324px;
 		.open-title {
-			margin-top: 77px;
+			margin-top: 35px;
 			font-size: 26px;
+			height: 102px;
+			text-align: center;
+			line-height: 102px;
 			font-family: 'MullerM';
+			color: #fef1b3;
+			background: url(@/assets/pcimg/activity/name_bg.png) no-repeat center center/ 100% 100%;
 		}
 
 		.open-price {
@@ -260,22 +330,22 @@
 
 
 	.sound-switch {
-		width: 32px;
-		height: 28px;
-		background: url(@/assets/pcimg/openbox/sound_close.png) no-repeat center;
+		width: 40px;
+		height: 40px;
+		background: url(@/assets/pcimg/activity/openvideo_bg.webp) no-repeat center;
 		background-size: 100% 100%;
 		position: absolute;
-		right: 17px;
+		right:350px;
 		top: 58px;
 		cursor: pointer;
 		&.active {
-			background: url(@/assets/pcimg/openbox/sound_open.png) no-repeat center;
+			background: url(@/assets/pcimg/activity/closevideo_bg.webp) no-repeat center;
 			background-size: 100% 100%;
 		}
 	}
 
 	.box-back {
-		width: 624px;
+		// width: 624px;
 		height: 422px;
 		background: url(@/assets/pcimg/openbox/case_bg.png) no-repeat center;
 		background-size: contain;
@@ -333,24 +403,26 @@
 			align-items: center;
 			box-sizing: border-box;
 			position: relative;
-			border-bottom: 1px solid #14162A;
+			gap: 10px;
+			// border-bottom: 1px solid #14162A;
 
 			.opt-btn {
-				width: 38px;
-				height: 70px;
+				width: 50px;
+				height: 40px;
 				border: none;
-				margin: 0 17px;
+				// margin: 0 17px;
 				text-align: center;
-				line-height: 70px;
+				line-height: 40px;
 				font-size: 17px;
 				position: relative;
 				color: #3A3958;
 				font-family: 'MullerM';
 				cursor: pointer;
-
+				background-color: #0d0d0c;
 				&.active {
 					color: #CFCEE9;
 					border-bottom: 1px solid #3A34B0;
+					background: url(@/assets/pcimg/activity/checkNum_bg.webp) no-repeat center center / 100% 100%;
 				}
 			}
 
@@ -402,11 +474,15 @@
 				border-radius: 4px;
 				text-align: center;
 				line-height: 64px;
-				color: #fff;
+				color: #FFF7BE;
 				font-size: 17px;
 				font-weight: bold;
 				margin: 0 auto;
 				cursor: pointer;
+				display: flex;
+				justify-content: center;
+				gap: 10px;
+				background: url(@/assets/pcimg/activity/openbox_openBtn_bg.webp) no-repeat center center/ 100% 100%;
 			}
 
 			.switch {
@@ -447,33 +523,34 @@
 		box-sizing: border-box;
 		max-width: 1410px;
 		width: 100%;
-		margin: 80px auto 10px;
+		// margin: 80px auto 10px;
+		margin-bottom: 10px;
 		position: relative;
-		background-color: #0D0E1A;
+		// background-color: #0D0E1A;
 
 
 		.tab-wrap {
 			display: flex;
 			align-items: center;
-			height: 96px;
+			// height: 96px;
 
 			.tab-item {
-				width: 174px;
-				height: 100%;
+				width: 140px;
+				height: 26px;
 				box-sizing: border-box;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				font-size: 18px;
+				font-size: 16px;
 				font-weight: bold;
-				color: #6F728A;
+				color: #EFEDEB;
 				background: none;
 				cursor: pointer;
-				border-bottom: 1px solid #0D0E1A;
-
+				// border-bottom: 1px solid #0D0E1A;
+				background: url(@/assets/pcimg/activity/boxlist_tab_bg.webp) no-repeat center center / 100% 100%;
 				&:hover
 				{
-					border-bottom: 1px solid #4638AD;
+					// border-bottom: 1px solid #4638AD;
 				}
 
 				img {
@@ -492,7 +569,8 @@
 
 				&.active {
 					color: #fff;
-					border-bottom: 1px solid #4638AD;
+					// border-bottom: 1px solid #4638AD;
+					background: url(@/assets/pcimg/activity/boxlist_tab_active_bg.webp) no-repeat center center / 100% 100%;
 
 					.icon-active {
 						display: block;
@@ -587,9 +665,11 @@
 	.drop-wrap {
 		max-width: 1410px;
 		width: 100%;
+		height: calc( 100% - 80px);
 		margin: 0 auto;
 		box-sizing: border-box;
-		min-height: 500px;
+		// min-height: 500px;
+		overflow: auto;
 		background-color: #15172C;
 
 

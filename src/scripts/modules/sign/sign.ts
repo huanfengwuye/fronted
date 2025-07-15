@@ -16,7 +16,7 @@ export default class Sign extends Vue
 	public store = useStore()
 
 	public get showSignView() { return this.store.state.showSignView }
-
+	public get showSignViewTab() { return this.store.state.showSignViewTab }
 	public agreementChecked = true
 	public signType = 'account' 		// account tel
 	public remember = false
@@ -92,7 +92,7 @@ export default class Sign extends Vue
 
 	public type = "login" 			///	当前类型
 	public country = "china" 		///	当前选中的国家
-
+	public type2 = "login"          /// 需要打开的弹窗类型
 	public showDragVerify = false 	///	是否显示拖拽组建
 	public isPassing = false
 
@@ -239,17 +239,19 @@ export default class Sign extends Vue
 	{
 		if( val )
 		{
-			this.type = 'login'
+		console.log( 'showSignView', val )
+
+			this.type = this.type2
 			await this.resetData()
 			this.initInviteCode()
 
 		}
 	}
 
-	@Watch( 'store.state.showSignViewTab' )
+	@Watch( 'showSignViewTab' )
 	public signViewTab( val: any )
 	{
-		this.type = val
+		this.type2 = val
 	}
 
 	// watch(

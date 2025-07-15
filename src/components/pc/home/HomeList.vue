@@ -26,6 +26,7 @@ const store = useStore();
 const router = useRouter();
 
 const homoBox = ref([]);
+const activeName = ref('')
 let animationRandom = ref(Math.floor(Math.random() * 100)); // 随机数
 const node = ref(0);
 let shootaudio = new Audio(audioshoot);
@@ -95,8 +96,9 @@ async function getBox() {
 		//		 boxItems.sort((a, b) => a.sort - b.sort);
 		//	 }
 		// }
-		homoBox.value = items;
-		activity.value = homoBox.value[5];
+		homoBox.value = items.filter( item => item.boxItems && item.boxItems.length > 0 );
+		activeName.value = homoBox.value[0].name;
+		activity.value = items[5];
 		// window.$dev && console.log( activity.value )
 		store.commit("setSectionModule", items);
 	}
@@ -252,10 +254,19 @@ function rewardWindowRight() {
 		<!-- <div class="new-active">
 			<div class="active-btn" @click="$router.push( '/p/newyear' )"></div>
 		</div> -->
-		
+		<div class="pc-home-name-list">
+			<div class="pc-home-name-list-item-box" v-for="(item, index) in homoBox">
+				<div
+				:key="index" class="pc-home-name-item" :class="{active: activeName ==item.name}" :style="`--itemIndex: ${ homoBox.length%2 == 0 ? Math.abs((homoBox.length/2-0.5) - index ): Math.abs(homoBox.length/2 - index )}`" @click="activeName=item.name">
+				<span class="item-icon"></span>
+				<span> {{ item.name }}</span>
+				</div>
+
+			</div>
+		</div>
 		<div
 			class="pc-home-list"
-			v-for="(item, index) in homoBox"
+			v-for="(item, index) in homoBox.filter(item=> item.name == activeName)"
 			:key="index"
 			:id="`section-${index}`"
 		>
@@ -466,12 +477,57 @@ function rewardWindowRight() {
 <style lang="scss" scoped>
 #pc-home-wrap {
 	box-sizing: border-box;
-	max-width: 1410px;
+	// max-width: 1410px;
 	width: 100%;
 	min-height: 500px;
-	background-color: #15172c;
-
+	// background-color: #15172c;
+	position: relative;
+	
+	.pc-home-name-list{
+		position: absolute;
+		left: -400px;
+		z-index: 98;
+		width: 560px;
+		height: 526px;
+		background: url(@/assets/pcimg/activity/boxnameList_bg.webp) center center / 100% 100% no-repeat;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		justify-content: space-around;
+		padding: 30px 0;
+		.pc-home-name-list-item-box{
+			height: 47px;
+			width: 100%;
+			position: relative;
+		}
+		.pc-home-name-item{
+			
+			position: absolute;
+			top: 0;
+			right: calc( -130px - var( --itemIndex )  * -45px);
+			width: 169px;
+			height: 47px;
+			border-radius:20px;
+			background: url(@/assets/pcimg/activity/name_item_bg.png) center center / 100% 100% no-repeat;
+			display: flex;
+			align-items: center;
+			padding-left: 9px;
+			font-size: 16px;
+			gap: 20px;
+			color: white;
+			&.active{
+				background: url(@/assets/pcimg/activity/name_item_active.png) center center / 100% 100% no-repeat;
+			}
+			.item-icon{
+				width: 33px;
+				height: 27px;
+				background: url(@/assets/pcimg/activity/nametitle_bg.png) center center / 100% 100% no-repeat;
+			}
+		}
+	}
 	.pc-home-list {
+		max-width: 1410px;
+		margin: 0 auto;
 		&:first-child {
 			margin-top: 0 !important;
 
@@ -684,26 +740,29 @@ function rewardWindowRight() {
 		}
 
 		.bg {
-			height: 178px;
+			height: 100px;
 			max-width: 1440px;
+			margin-top: 40px;
+			margin-bottom: 40px;
+			display: flex;
+			justify-content: center;
 			// background: url("@/assets/pcimg/common/new-year-bg.png") no-repeat;
-			background: linear-gradient(180deg, #101120 0%, #121323 100%);
+			// background: linear-gradient(180deg, #101120 0%, #121323 100%);
 			.box-title {
-				height: 100%;
-				line-height: 183px;
-				font-size: 21px;
+				height: 88px;
+				line-height: 88px;
+				font-size: 28px;
 				font-weight: 500;
-				text-align: left;
-				padding-left: 45px;
+				text-align: center;
+				// padding-left: 45px;
 				// padding-left: 175px;
 				// padding-left: 125px;
-				width: 100%;
+				width: 280px;
 				margin: 0;
-				color: #fff;
+				color: #fef1b3;
 				text-transform: capitalize;
 				box-sizing: border-box;
-				background: url(@/assets/romimg/common/pc-home-title-bg.png) no-repeat
-					left top;
+				background: url(@/assets/pcimg/activity/name_bg.png) no-repeat center center/ 100% 100%;
 				// background: url("@/assets/pcimg/common/title-bg-active.png") no-repeat
 				// 	left top;
 				//

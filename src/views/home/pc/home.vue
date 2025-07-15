@@ -1,10 +1,10 @@
 <script lang="ts" src="@/scripts/pages/home/home.ts"></script>
 <template>
 	<div class="pc-home-wrap">
-		<div class="home-top-wrap">
+		<!-- <div class="home-top-wrap">
 			<Notice></Notice>
 			<Banner />
-		</div>
+		</div> -->
 		<HomeList />
 		<!-- <sidebar /> -->
 	</div>
@@ -18,7 +18,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-
+	background: url(@/assets/pcimg/activity/box_bg.webp) center center/100% 100%;
 	.home-top-wrap {
 		width: 100%;
 		padding-top: 0px;
