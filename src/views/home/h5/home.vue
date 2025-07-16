@@ -22,7 +22,7 @@
 .home-wrap {
 	// background: #10271f;
 	background-size: 100%;
-	padding-bottom: 50px;
+	// padding-bottom: 50px;
 	position: relative;
 
 	.home-bg {

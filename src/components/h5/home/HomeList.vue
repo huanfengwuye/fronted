@@ -268,8 +268,9 @@ onMounted(() => {
 				</div> -->
 				<div
 					class="item-pic"
-					:style="'background-image: url(' + value.imageUrl + ');'"
+					
 				>
+				<!-- :style="'background-image: url(' + value.imageUrl + ');'" -->
 					<img :src="value.weaponImageUrl" :alt="value.name" />
 				</div>
 				<div class="item-name">{{ value.name }}</div>
@@ -312,12 +313,14 @@ onMounted(() => {
 	}
 	width: 100%;
 	// padding: 0 20px;
-	padding-bottom: 350px;
+	// padding-bottom: 350px;
 	box-sizing: border-box;
-	min-height: 800px;
+	// min-height: 800px;
+	height: calc(100vh - 1.76rem);
+	overflow: auto;
 	// overflow: hidden;
 	position: relative;
-	padding-top: 60px;
+	padding-top: 2rem;
 	.home-list {
 	// &.active {
 	//	 margin-top: -76px;
@@ -714,7 +717,7 @@ onMounted(() => {
 				background-size: cover;
 				background-repeat: no-repeat;
 				z-index: 3 !important;
-
+				background: url(@/assets/pcimg/activity/h5box_bg.png) no-repeat center center / 100% 100%;
 				img {
 				width: 296px;
 				height: auto;

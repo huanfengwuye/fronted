@@ -48,8 +48,9 @@
 		<div class="box-back">
 			<div
 				class="box-pic"
-				:style="'background-image: url(' + boxData.imageUrl + ')'"
+				
 			>
+			<!-- :style="'background-image: url(' + boxData.imageUrl + ')'" -->
 				<img :src="boxData.weaponImageUrl" :alt="boxData.name" />
 			</div>
 		</div>
@@ -89,93 +90,101 @@
 				/>
 			</div>
 		</div>
-
-		<div class="tabs">
-			<div
-				class="tab-item"
-				:class="{ active: tabType == 0 }"
-				@click="onClickTab(0)"
-			>
-				<span class="icon iconfont">&#xe63a;</span> {{ t('openbox.accessoriesList') }}
-			</div>
-			<div
-				class="tab-item"
-				:class="{ active: tabType == 1 }"
-				@click="onClickTab(1)"
-			>
-				<span class="icon iconfont">&#xe616;</span> {{ t('battle.historyDrop') }}
-			</div>
-
-			<!-- <van-notice-bar
-				scrollable
-				text="温馨提示:饰品提取时出现任何问题,一定联系客服解决,切勿上头!"
-			/> -->
-		</div>
-
-		<div class="presentation">
-			<div class="fliter-tab" v-if="tabType == 1">
-				<p :class="{ active: isAchorDrop }" @click="onClickFilterTab(true)">
-					{{ t('battle.anchor') }}
-				</p>
-				<p :class="{ active: !isAchorDrop }" @click="onClickFilterTab(false)">
-					{{ t('lucky.memberDrop') }}
-				</p>
-			</div>
-			<div
-				class="probability_main"
-				v-if="tabType == 0"
-				:class="{
-					len5: rarityList.filter((el) => el.probability > 0).length >= 5,
-				}"
-			>
+		<div class="box_info">
+			<div class="topBgbox"></div>
+			<div class="tabs">
 				<div
-					class="probability_item"
-					v-for="(item, index) in rarityList.filter((el) => el.probability > 0)"
-					:key="index"
-					:style="{ color: item.color }"
+					class="tab-item"
+					:class="{ active: tabType == 0 }"
+					@click="onClickTab(0)"
 				>
-					<span class="icon iconfont">&#xe649;</span>
-					<p>{{ item.probability }}%</p>
+					<!-- <span class="icon iconfont">&#xe63a;</span> -->
+					 <span>
+						 {{ t('openbox.accessoriesList') }}
+					 </span>
+				</div>
+				<div
+					class="tab-item"
+					:class="{ active: tabType == 1 }"
+					@click="onClickTab(1)"
+				>
+					<!-- <span class="icon iconfont">&#xe616;</span>  -->
+					 <span>
+						 {{ t('battle.historyDrop') }}
+					 </span>
+				</div>
+	
+				<!-- <van-notice-bar
+					scrollable
+					text="温馨提示:饰品提取时出现任何问题,一定联系客服解决,切勿上头!"
+				/> -->
+			</div>
+	
+			<div class="presentation" >
+				<div class="fliter-tab" v-if="tabType == 1">
+					<p :class="{ active: isAchorDrop }" @click="onClickFilterTab(true)">
+						{{ t('battle.anchor') }}
+					</p>
+					<p :class="{ active: !isAchorDrop }" @click="onClickFilterTab(false)">
+						{{ t('lucky.memberDrop') }}
+					</p>
+				</div>
+				<div
+					class="probability_main"
+					v-if="tabType == 0&&false"
+					:class="{
+						len5: rarityList.filter((el) => el.probability > 0).length >= 5,
+					}"
+				>
+					<div
+						class="probability_item"
+						v-for="(item, index) in rarityList.filter((el) => el.probability > 0)"
+						:key="index"
+						:style="{ color: item.color }"
+					>
+						<span class="icon iconfont">&#xe649;</span>
+						<p>{{ item.probability }}%</p>
+					</div>
 				</div>
 			</div>
-		</div>
-
-		<H5WeaponListCpt :list="goodsList" v-show="tabType == 0"></H5WeaponListCpt>
-
-		<div class="drop-wrap" v-show="tabType == 1">
-			<div class="drop-item">
-				<div v-if="!isAchorDrop" class="player">{{ t('battle.member') }}</div>
-				<div v-if="isAchorDrop" class="player">{{ t('battle.anchor') }}</div>
-				<div class="price">{{ t('battle.price') }}</div>
-				<div class="name">{{ t('battle.goodsName') }}</div>
-			</div>
-			<div class="drop-item" v-for="(item, index) in dropData" :key="index">
-				<div class="header">
-					<H5Avatar
-						v-if="!isAchorDrop"
-						:userModel="item"
-						:size="'one'"
-						:hide-frame="true"
-					></H5Avatar>
-					<div class="anchor" v-if="isAchorDrop">
+	
+			<H5WeaponListCpt :list="goodsList" v-show="tabType == 0"></H5WeaponListCpt>
+	
+			<div class="drop-wrap" v-show="tabType == 1">
+				<div class="drop-item">
+					<div v-if="!isAchorDrop" class="player">{{ t('battle.member') }}</div>
+					<div v-if="isAchorDrop" class="player">{{ t('battle.anchor') }}</div>
+					<div class="price">{{ t('battle.price') }}</div>
+					<div class="name">{{ t('battle.goodsName') }}</div>
+				</div>
+				<div class="drop-item" v-for="(item, index) in dropData" :key="index">
+					<div class="header">
 						<H5Avatar
+							v-if="!isAchorDrop"
 							:userModel="item"
 							:size="'one'"
 							:hide-frame="true"
 						></H5Avatar>
-						<img
-							class="img-tv"
-							src="@/assets/romimg/openbox/live-item__tv.png"
-						/>
+						<div class="anchor" v-if="isAchorDrop">
+							<H5Avatar
+								:userModel="item"
+								:size="'one'"
+								:hide-frame="true"
+							></H5Avatar>
+							<img
+								class="img-tv"
+								src="@/assets/romimg/openbox/live-item__tv.png"
+							/>
+						</div>
+						<div class="nickname">{{ item.nickName }}</div>
 					</div>
-					<div class="nickname">{{ item.nickName }}</div>
+					<!-- //boxData.price -->
+					<span class="span_p" :class="{ active: boxData.price < item.price }">
+						<Price :currency="item.price"></Price>
+						<!-- ${{ item.price }} -->
+					</span>
+					<p class="hide">{{ item.goodsName }}</p>
 				</div>
-				<!-- //boxData.price -->
-				<span class="span_p" :class="{ active: boxData.price < item.price }">
-					<Price :currency="item.price"></Price>
-					<!-- ${{ item.price }} -->
-				</span>
-				<p class="hide">{{ item.goodsName }}</p>
 			</div>
 		</div>
 
@@ -317,12 +326,12 @@
 	.box-back {
 		width: 750px;
 		height: 542px;
-		background: url(@/assets/romimg/openbox/back.png) no-repeat center;
+		background: url(@/assets/pcimg/activity/h5openbox_item_bg2.webp) no-repeat center;
 		background-size: 100% 100%;
 		margin: -60px auto 0;
 		.box-pic {
-			width: 420px;
-			height: 420px;
+			width: 9.3rem;
+			height: 7.74rem;
 			margin: 50px auto 0;
 			background-position: center;
 			background-size: contain;
@@ -330,8 +339,9 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-
+			background-image: url(@/assets/pcimg/activity/h5openbox_item_bg.webp);
 			img {
+				width: 6.65rem;
 				max-width: 100%;
 				max-height: 100%;
 				// margin-top: -50px;
@@ -428,13 +438,13 @@
 	}
 
 	.open-btn-box {
-		margin: 90px auto;
+		margin: 0 auto 60px;
 		width: 100%;
 		position: relative;
 
 		.open-btn {
-			width: 500px;
-			height: 116px;
+			width: 3.1rem;
+			height: 0.81rem;
 			text-align: center;
 			line-height: 116px;
 			color: #fff;
@@ -477,9 +487,9 @@
 			justify-content: center;
 			align-items: center;
 
-			color: #dce1e5;
+			color: #ffec91;
 			text-align: center;
-			font-size: 36px;
+			font-size: 0.74rem;
 			font-style: normal;
 			font-weight: 700;
 
@@ -543,35 +553,72 @@
 			// }
 		}
 	}
+	.box_info{
+		.topBgbox{
+			width: 100%;
+			height: 0.24rem;
+			z-index: 2;
+			position: relative;
+			&::after{
+				content: '';
+				background: url(@/assets/pcimg/activity/h5topleft_bg.png) no-repeat center center / 100% 100%;
+				width: 49%;
+				height: 100%;
+				position: absolute;
+				top: 0px;
+				background-size: auto 100%;
+				background-repeat: no-repeat;
+				background-position: left center;
+			}
+			&::before{
+				content: '';
+				background: url(@/assets/pcimg/activity/h5topright_bg.png) no-repeat center center / 100% 100%;
+				width: 49%;
+				height: 100%;
+				position: absolute;
+				top: 0px;
+				background-size: auto 100%;
+				background-repeat: no-repeat;
+				background-position: left center;
+				right: 0px;
+    			transform: scaleX(-1);
+			}
+		}
+	}
 	.tabs {
 		display: flex;
 		align-items: center;
-		justify-content: space-around;
+		// justify-content: space-around;
 		justify-items: center;
 		box-sizing: border-box;
 		width: 100%;
 		position: relative;
-		font-size: 32px;
+		font-size: 0.34rem;
 		font-weight: 500;
-		height: 160px;
+		padding: 0 0.4rem;
+		// height: 160px;
 
 		.tab-item {
 			margin: 0.2px;
+			margin-top: 0.49rem;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			flex: 1;
-			height: 160px;
+			// flex: 1;
+			width: 3.59rem;
+			height: 0.62rem;
 			color: #9ca1c7;
-			background-color: #111324;
+			// background-color: #111324;
+			background: url(@/assets/pcimg/activity/h5boxlist_tab_bg.webp) no-repeat center center / 100% 100%;
 			span:first-child {
-				font-size: 40px;
+				// font-size: 40px;
 				margin-right: 20px;
 			}
 			&.active {
 				color: #fff;
-				background: url(@/assets/romimg/openbox/tab_bg.png) no-repeat center;
-				background-size: 100% 100%;
+				background: url(@/assets/pcimg/activity/h5boxlist_tab_active_bg.webp) no-repeat center center / 100% 100%;
+
+				// background-size: 100% 100%;
 			}
 		}
 	}

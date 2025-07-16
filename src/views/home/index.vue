@@ -5,10 +5,10 @@
                 <div class="bg_flf absolute z2 bg_img"><img src="https://csgo-oss.k1cs.com/web/home/h_fuli.png">
                     <div class="divText absolute flex flex-column flex-xy-center z5">
                         <router-link v-if="isPc" to="/p/roll" class="router_link">
-                            <span >roll房</span>
+                            <span >后福无量</span>
                         </router-link>
                         <router-link v-else to="/m/roll" class="router_link">
-                            <span >roll房</span>
+                            <span >后福无量</span>
                         </router-link>
                     </div>
                 </div>
@@ -24,19 +24,23 @@
                         </router-link>
                     </div>
                 </div>
-                <div class="bg_lyt absolute z2 bg_img"><img src="https://csgo-oss.k1cs.com/web/home/h_lanyue2.png"><img
-                        src="https://csgo-oss.k1cs.com/web/home/h_lanyue.webp" class="webp">
+                <div class="bg_lyt absolute z2 bg_img">
+                    <img v-if="isPc" src="https://csgo-oss.k1cs.com/web/home/h_lanyue2.png">
+                    <img v-else src="@/assets/pcimg/activity/indexh5_lyt.png">
+                    <img src="https://csgo-oss.k1cs.com/web/home/h_lanyue.webp" class="webp">
                     <div class="divText absolute flex flex-column flex-xy-center z5">
                         <router-link  v-if="isPc" to="/p/battle/list" class="router_link">
-                            <span >对战房</span>
+                            <span >旗鼓相当</span>
                         </router-link>
                         <router-link v-else to="/m/battle/list" class="router_link">
-                            <span >对战房</span>
+                            <span >旗鼓相当</span>
                         </router-link>
                     </div>
                 </div>
-                <div class="bg_tc absolute z2 bg_img"><img src="https://csgo-oss.k1cs.com/web/home/h_tianci.png"><img
-                        src="https://csgo-oss.k1cs.com/web/home/h_tianci.webp" class="webp">
+                <div class="bg_tc absolute z2 bg_img">
+                        <img  v-if="isPc" src="https://csgo-oss.k1cs.com/web/home/h_tianci.png" />
+                        <img v-else src="@/assets/pcimg/activity/index-tianci.png" />
+                        <img src="https://csgo-oss.k1cs.com/web/home/h_tianci.webp" class="webp" />
                     <!-- <div class="divText1 absolute flex flex-column flex-xy-center z5">
                         <router-link to="/index" class="router_link">
                             <span >BOX开箱</span>
@@ -51,13 +55,15 @@
                         </router-link>
                     </div> -->
                 </div>
-                <div class="bg_jxk absolute z2 bg_img"><img src="https://csgo-oss.k1cs.com/web/home/h_junxu.png">
+                <div class="bg_jxk absolute z2 bg_img">
+                    <img v-if="isPc" src="https://csgo-oss.k1cs.com/web/home/h_junxu.png">
+                    <img v-else src="@/assets/pcimg/activity/indexh5-junxu.png">
                     <div class="divText absolute flex flex-column flex-xy-center z5">
                         <router-link v-if="isPc" to="/p/home" class="router_link">
-                            <span>BOX开箱</span>
+                            <span>旗开得胜</span>
                         </router-link>
                         <router-link v-else to="/m/home" class="router_link">
-                            <span>BOX开箱</span>
+                            <span>旗开得胜</span>
                         </router-link>
                     </div>
                 </div>
@@ -182,7 +188,7 @@ html,body{
 .ScJti {
     --z80px:50px;
     --z1px:.8px;
-    --z32px:12px;
+    --z32px:21px;
     background: url(@/assets/pcimg/activity/h_bg.png) center center / cover no-repeat;
     .bg_img {
         .divText {
@@ -216,7 +222,7 @@ html,body{
     .bg_jxk {
         left: -1px;
         bottom: -3%;
-        width: 39%;
+        // width: 39%;
         max-width: 700px;
         .divText {
             left: 46%;
@@ -226,7 +232,7 @@ html,body{
     .bg_lyt {
         left: 24%;
         bottom: 4%;
-        width: 37%;
+        // width: 37%;
         max-width: 700px;
         .divText {
             left: 45%;
@@ -282,7 +288,7 @@ html,body{
             font-family: Honglei;
             -webkit-writing-mode: vertical-lr;
             writing-mode: vertical-lr;
-            letter-spacing: calc(2 * var(--z1px));
+            // letter-spacing: calc(2 * var(--z1px));
         }
     }
     .divText1 {
@@ -295,7 +301,7 @@ html,body{
             font-family: Honglei;
             -webkit-writing-mode: vertical-lr;
             writing-mode: vertical-lr;
-            letter-spacing: calc(2 * var(--z1px));
+            // letter-spacing: calc(2 * var(--z1px));
             margin-top: -20px;
         }
     }
@@ -303,14 +309,30 @@ html,body{
 
 @media (max-width: 480px){
  .ScJti{
-    // --z80px:5rem;
-    // --z1px:.0625rem;
-    // --z32px:2rem;
+    --z80px:5rem;
+    --z1px:.0625rem;
+    --z32px:2rem;
+    height: 20.9rem !important;
+    position: relative;
     background: url(@/assets/pcimg/activity/h_bg.png) center center / cover no-repeat;
+    .divText {
+        // font-size: 0.5rem;
+        width: 0.75rem;
+        height: 2.35rem;
+        span{
+            font-size: 0.35rem;
+
+        }
+    }
     .bg_flf{
         width: 42.1%;
         left: 0px;
-        top: 27%;
+        top: 28%;
+        z-index: 3;
+        .divText{
+            left: 68%;
+            top: -27%;
+        }
 
     }
     .bg_jxk{
@@ -319,18 +341,30 @@ html,body{
         top: 36%;
         transform: translateX(-100%);
         img{
-            transform: scaleX(-1);
+            // transform: scaleX(-1);
         }
         .divText{
-            left: 62%;
-            top: -11%;
+            left: 45%;
+            top: -28%;
         }
     }
     .bg_lyt{
-        width: 73%;
+        width: 2.8rem;
+        height: 6rem;
         left: 0px;
-        top: 48%;
-        transform: translatex(-58%);
+        top: 51%;
+        // transform: translatex(-58%);
+        z-index: 3;
+        &.bg_img{
+            img{
+                // height: 6.00rem;
+            }
+        }
+        .webp{
+            width: 3.5rem;
+            height: 4.6rem;
+            top: -33%;
+        }
         .divText{
             left: 100%;
             top: 0%;
@@ -348,6 +382,23 @@ html,body{
         .divText {
             right: 34%;
             top: -29%;
+        }
+    }
+    .bg_tc{
+        width: 100%;
+        right: 0;
+        top: 0;
+        &.bg_img{
+            img{
+                width: 10.6rem;
+                height: 15.4rem;
+            }
+            .webp{
+                top: 0.1rem;
+                right: -1rem;
+                width: 5.3rem;
+                height: 5.3rem;
+            }
         }
     }
 }

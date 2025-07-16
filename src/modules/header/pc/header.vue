@@ -811,7 +811,7 @@ export default class PCHeader extends Header {}
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					height: 92px;
+					height: 70px;
 					cursor: pointer;
 					width: 196px;
 

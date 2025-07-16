@@ -97,7 +97,10 @@ function toactiveIndex(index) {
 				<div class="weapon-info" v-else>
 					<div class="weapon-item-price">
 						<!-- ${{ item.price }} -->
-						<Price size="13" color="#75DC9E" font-weight="700" :currency="item.price"></Price>
+						<!-- <Price size="13" color="#75DC9E" font-weight="700" :currency="item.price"></Price> -->
+						 <div>{{ truncation(item.probability) }}%</div>
+						 {{ item.goodsName.split("|")[1].match(/（.*?）/g)}}
+						<div> {{item.goodsName.split("|")[1]}}</div>
 					</div>
 					<div v-if="showBaolv" class="rate" @click="showProbability(index)">
 						{{ truncation(item.probability) }}%
@@ -138,18 +141,19 @@ function toactiveIndex(index) {
 		display: flex;
 		flex-wrap: wrap;
 		box-sizing: border-box;
-		justify-content: space-between;
+		// justify-content: space-between;
 		width: 100%;
 		margin-top: 10px;
 		margin-bottom: 20px;
 		padding: 0 30px;
+		gap: 0.24rem;
 
 		.weapon-item {
 			position: relative;
 			background: #1b1e38;
-			margin-top: 20px;
-			width: 335px;
-			height: 520px;
+			// margin-top: 20px;
+			width: 2.9rem;
+			height: 2.9rem;
 			// margin: 10px;
 			display: flex;
 			flex-direction: column;
@@ -166,8 +170,8 @@ function toactiveIndex(index) {
 			// }
 
 			.weapon-item-pic {
-				width: 259px;
-				height: 198px;
+				width: 2.75rem;
+				height: 2.06rem;
 				display: flex;
 				justify-content: center;
 				align-items: center;

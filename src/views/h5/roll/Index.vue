@@ -223,7 +223,12 @@ function onFinish(item) {}
 
 <template>
 	<div id="roll" class="min-wrap-height">
-		<TopTitleBack title="ROLL"></TopTitleBack>
+		<!-- <TopTitleBack title="ROLL"></TopTitleBack> -->
+		 <div class="RoomTitleBox">
+			<div class="RoomTitle">
+				<span>roll房</span>
+			</div>
+		 </div>
 		<Tabs :items="tabItems" @tabChangedEvent="tabChangedEvent"></Tabs>
 		<div class="roll-top">
 			<div class="bag-sort-wrap">
@@ -393,7 +398,23 @@ function onFinish(item) {}
 #roll {
 	box-sizing: border-box;
 	width: 100%;
+	.RoomTitleBox{
+		padding-left: 0.372rem;
+		padding-top: 0.172rem;
 
+	}
+	.RoomTitle{
+		width: 2.23rem;
+		height: 1.19rem;
+		background: url(@/assets/pcimg/activity/h5rollroom_active_bg.webp) no-repeat center center /100% 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		span{
+			color: #fff;
+			font-size: 0.322rem;
+		}
+	}
 	#tabs{
 		// width: 500px;
 		.tab-item{

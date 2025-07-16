@@ -14,6 +14,7 @@ import PasswordRed from "@/components/h5/pwred/Index.vue";
 import RegRed from "@/components/h5/regred/Index.vue";
 import UpdateNotice from "@/views/h5/download/UpdateNotice.vue";
 import RecordSwiper from "@/components/h5/home/RecordSwiper.vue";
+import navaBar from  '@/components/h5/navaBar/index.vue'
 // import ActivityDialog from "@/views/h5/activity/ActivityDialog.vue";
 import { onMounted, watch, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -31,7 +32,7 @@ const router = useRouter();
 const store = useStore();
 const showBrowserTip = ref( false )
 const showRecordSwiper = ref(true)
-const notshowRecordSwiperList = ['/m/home','/m/openbox']
+const notshowRecordSwiperList = ['/m/home','/m/openbox','/m/roll','/m/roll_detail']
 if(notshowRecordSwiperList.includes(route.path)){
 	showRecordSwiper.value = false
 }
@@ -79,11 +80,12 @@ watch(route, (newRoute, oldRoute) => {
 		<Header/>
 		<RecordSwiper v-if="showRecordSwiper" />
 		<router-view/>
-		<Footer/>
+		<!-- <Footer/> -->
 		<introduce/>
 		<BackToTop></BackToTop>
 		<PasswordRed></PasswordRed>
 		<RegRed></RegRed>
+		<navaBar />
 		<!-- <sidebar /> -->
 		
 		<!-- <register /> -->

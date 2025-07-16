@@ -9,6 +9,7 @@ import { useStore } from "vuex";
 import { GoodImageBgType } from "@/util/util";
 import { getGoodsNamePre, getGoodsNameSec } from "@/util/common";
 import { tokenName } from "@/config"
+import h5_title_bg from '@/assets/pcimg/activity/h5_title_bg.png'
 import i18n from "@/lang"
 const t = i18n.global.t
 
@@ -55,7 +56,8 @@ function onClickItem(item) {
 }
 
 function getImageBg(item) {
-	return store.getters.getGoodsBgImage(GoodImageBgType.record, item.goodsLevel);
+	// return store.getters.getGoodsBgImage(GoodImageBgType.record, item.goodsLevel);
+	return h5_title_bg
 }
 
 onMounted(() => {
@@ -189,11 +191,11 @@ function goToVip() {
 							<img :src="item.iconUrl" :alt="item.goodsName" class="item" />
 						</div>
 						<div class="item-info">
-							<p class="item-info1 hide">
+							<!-- <p class="item-info1 hide">
 								{{ getGoodsNamePre(item.goodsName) }}
-							</p>
+							</p> -->
 							<p class="item-info2 hide">
-								{{ getGoodsNameSec(item.goodsName) }}
+								{{ getGoodsNamePre(item.goodsName)  }}{{ getGoodsNameSec(item.goodsName) }}
 							</p>
 						</div>
 						<div class="swiper-user-wrap" v-if="false">
@@ -317,14 +319,14 @@ function goToVip() {
 		box-sizing: border-box;
 		// margin: 20px auto;
 		width: 100%;
-		height: 155px;
+		height: 1.78rem;
 		overflow: hidden;
 		.sub-container {
 			display: flex;
-			gap: 10px;
+			// gap: 10px;
 			.swiper-slide {
-				width: 185px;
-				height: 155px;
+				width: 2.12rem;
+				height: 1.36rem;
 				// border-width: 0px 1px 0px 1px;
 				// border-style: solid;
 				border-image-source: linear-gradient(
@@ -369,8 +371,10 @@ function goToVip() {
 
 				.swiper-item {
 					display: block;
-					width: 100% !important;
-					height: 100%;
+					// width: 100% !important;
+					// height: 100%;
+					width: 2.12rem;
+					height: 1.36rem;
 					background-position: center;
 					background-repeat: no-repeat;
 					background-size: cover;
@@ -379,15 +383,15 @@ function goToVip() {
 					position: relative;
 					cursor: pointer;
 					overflow: hidden;
-
+					background: url(@/assets/pcimg/activity/h5_title_bg.png) no-repeat center center/100% 100%;
 					.swiper-pic {
-						width: 135px;
-						height: 132px;
+						width: 1.98rem;
+						height: 0.91rem;
 						margin: 0 auto;
 						display: flex;
 						justify-content: center;
 						align-items: center;
-
+						
 						img {
 							max-width: 100%;
 							max-height: 100%;
@@ -408,9 +412,10 @@ function goToVip() {
 						}
 
 						.item-info2 {
-							font-size: 24px;
+							font-size:.29rem;
 							color: #cbccd6;
-							width: 100%;
+							width: calc(100% - 20px);
+							margin: 0 auto;
 							overflow: hidden;
 							word-break: break-all;
 							white-space: nowrap;

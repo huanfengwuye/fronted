@@ -43,8 +43,8 @@ export default class H5Header extends Header {}
 				<!-- @click="onH5ClickSign" -->
 				<!-- <img src="@/assets/romimg/sign/login.png" alt="" srcset="" />
 				{{ t( 'router.login' ) }} -->
-				<div class="login_btn" @click="onClickSign('1')">登录</div>
         		<div class="login2_btn" @click="onClickSign('2')">注册</div>
+				<div class="login_btn" @click="onClickSign('1')">登录</div>
 			</div>
 
 			<div class="user-wrap" @click="setH5UserShow" v-show="hasLogin">
@@ -723,7 +723,7 @@ export default class H5Header extends Header {}
 					display: flex;
 					align-items: center;
 					img {
-						height: 48px;
+						height: 1.05rem;
 						margin-left: 8px;
 					}
 				}
@@ -743,23 +743,30 @@ export default class H5Header extends Header {}
 			font-size: 32px;
 			font-style: normal;
 			font-weight: 300;
+			font-family: HongLei;
+			margin-right: 0.4rem;
+			gap: 0.4rem;
 			// border-bottom: 2px solid #373ab7;
 			// background: #1f2447;
 			.login_btn{
-				height: 35px;
-				width: 95px;
+				height: .74rem;
+				width: 1.7rem;
 				text-align: center;
-				line-height: 35px;
-				font-size: 21px;
+				line-height: .74rem;
+				font-size: 0.39rem;
 				margin-right: 10px;
+				font-family: HongLei;
+				flex-shrink: 0;
 				background: url('@/assets/pcimg/activity/denlu.png') center center / 100% 100% no-repeat;
 			}
 			.login2_btn{
-				height: 35px;
-				width: 95px;
+				height: .74rem;
+				width: 1.7rem;
 				text-align: center;
-				line-height: 35px;
-				font-size: 21px;
+				line-height: .74rem;
+				font-size: 0.39rem;
+				font-family: HongLei;
+				flex-shrink: 0;
 				background: url('@/assets/pcimg/activity/zhuce.png') center center / 100% 100% no-repeat;
 			}
 			img {
