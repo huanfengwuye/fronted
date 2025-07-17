@@ -13,14 +13,14 @@ import audiorecory from "@/assets/audio/recory.mp3"
 import { tokenName } from '@/config'
 import store from '@/store'
 import wv from '@/util/webview'
-
+import { useRoute }from 'vue-router'
 @Component({
 	components : { Turntable }
 })
 export default class Header extends Vue
 {
 	public store = useStore()
-
+	public route = useRoute()
 	public t = i18n.global.t
 
 	@Inject()

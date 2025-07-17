@@ -35,7 +35,7 @@ const rollState = ref({ text: t('battle.inProgress'), id: 1 });
 const keyword = ref(""); //搜索关键字
 
 const roomListRef = ref([]);
-
+const showSelect = ref(false);
 onMounted(() => {
 	getRollRoom();
 });
@@ -224,50 +224,60 @@ function onFinish(item) {}
 <template>
 	<div id="roll" class="min-wrap-height">
 		<!-- <TopTitleBack title="ROLL"></TopTitleBack> -->
-		 <div class="RoomTitleBox">
-			<div class="RoomTitle">
-				<span>roll房</span>
-			</div>
+		 <div class="roll_top_box">
+			 <div class="RoomTitleBox">
+				<div class="RoomTitle">
+					<span>roll房</span>
+				</div>
+			 </div>
+			 <div class="roll-top">
+				 <div class="bag-sort-wrap">
+					 <!-- <p class="drop-down-title">{{ t('common.status') }}</p> -->
+					 <!-- <div class="drop-down">
+						 <div
+							 class="sort-text hide"
+							 :class="{ active: downactive }"
+							 @click="onClickDown"
+						 >
+							 {{ rollState.text }}<img src="@/assets/romimg/common/arrow_down.png" alt="" />
+						 </div>
+						 <div class="down" :style="'height:' + downHeight">
+							 <div
+								 class="sort-item"
+								 v-for="(item, index) in downList"
+								 :key="index"
+								 @click="onClickDownItem(item)"
+							 >
+								 {{ item.text }}
+							 </div>
+						 </div>
+					 </div> -->
+					 <div class="search">
+						 <input
+							 type="text"
+							 v-model="keyword"
+							 :placeholder="t('battle.enterRoom')"
+							 @keyup.enter="onClickSearch"
+						 />
+						 <!-- <div class="search_btn" @click="onClickSearch">
+							 <img src="@/assets/romimg/common/search.png" alt="" />
+						 </div> -->
+						 <div class="ic_search_container" @click="onClickSearch()">
+							 <span class="icon iconfont">&#xe643;</span>
+						 </div>
+					 </div>
+				 </div>
+			 </div>
+			 <div class="roll-top-select" :class="{active:showSelect}" >
+				<div class="roll-top-select-title" @click="showSelect=!showSelect">
+					<span class="roll-top-select-title-text" :class="{active:showSelect}">{{ tabItems[tabType-1]  }}</span>
+				</div>
+				<div v-show="showSelect" class="roll-top-select-list">
+					<div @click="tabChangedEvent(index)" v-for="(item,index) in tabItems" class="roll-top-select-item"><span>{{item}}</span></div>
+				</div>
+			 </div>
 		 </div>
-		<Tabs :items="tabItems" @tabChangedEvent="tabChangedEvent"></Tabs>
-		<div class="roll-top">
-			<div class="bag-sort-wrap">
-				<p class="drop-down-title">{{ t('common.status') }}</p>
-				<div class="drop-down">
-					<div
-						class="sort-text hide"
-						:class="{ active: downactive }"
-						@click="onClickDown"
-					>
-						{{ rollState.text }}<img src="@/assets/romimg/common/arrow_down.png" alt="" />
-					</div>
-					<div class="down" :style="'height:' + downHeight">
-						<div
-							class="sort-item"
-							v-for="(item, index) in downList"
-							:key="index"
-							@click="onClickDownItem(item)"
-						>
-							{{ item.text }}
-						</div>
-					</div>
-				</div>
-				<div class="search">
-					<input
-						type="text"
-						v-model="keyword"
-						:placeholder="t('battle.enterRoom')"
-						@keyup.enter="onClickSearch"
-					/>
-					<!-- <div class="search_btn" @click="onClickSearch">
-						<img src="@/assets/romimg/common/search.png" alt="" />
-					</div> -->
-					<div class="ic_search_container" @click="onClickSearch()">
-						<span class="icon iconfont">&#xe643;</span>
-					</div>
-				</div>
-			</div>
-		</div>
+		<!-- <Tabs :items="tabItems" @tabChangedEvent="tabChangedEvent"></Tabs> -->
 		<van-list
 			v-model="loading"
 			:finished="finished"
@@ -398,6 +408,76 @@ function onFinish(item) {}
 #roll {
 	box-sizing: border-box;
 	width: 100%;
+	position: relative;
+	height: calc(100vh - 3.2rem);
+	background: url(@/assets/pcimg/activity/h5open_bg.webp) no-repeat center center / 100% 100%;
+	overflow: auto;
+	.roll_top_box{
+		width: 100%;
+		position: sticky;
+		top: 0;
+		z-index: 3;
+		background: url(@/assets/pcimg/activity/h5open_bg.webp) no-repeat;
+		.roll-top-select{
+			position: absolute;
+			right:0.49rem;
+			z-index: 4;
+			top:1rem;
+			width: 2.23rem;
+			min-height: 1.39rem;
+			&.active{
+				background: url(@/assets/pcimg/activity/h5roolroomSelect_bg.webp) no-repeat center center / 100% 100%;
+			}
+			.roll-top-select-title{
+				width: 100%;
+				height: 1.39rem;
+				display: flex;
+				// justify-content: center;
+				padding-left: 0.34rem;
+				box-sizing: border-box;
+				align-items: center;
+				color: #fff;
+				font-weight: bold;
+				font-size: 0.297rem;
+				background: url(@/assets/pcimg/activity/h5roolroomSelect.png) no-repeat center center / 100% 100%;
+				&-text{
+					position:relative;
+					&::after{
+						position: absolute;
+						right: -0.58rem;
+						top: 0.05rem;
+						content: "";
+						width: 0.39rem;
+						height: 0.39rem;
+						background: url(@/assets/pcimg/activity/icon_down.webp) center center / 100% 100% no-repeat;
+						transition: transform 0.3s;
+					}
+					&.active::after{
+						transform: rotate(-90deg);
+					}
+				}
+			}
+			&-list{
+				// position: absolute;
+				width: 100%;
+				// top: 1rem;
+				transform: translatey(-0.24rem);
+				.roll-top-select-item{ 
+					height: 1rem;
+					background: url(@/assets/pcimg/activity/h5roolroomSelectopt.png) no-repeat center center / 100% 100%;
+					display: flex;
+					padding-left: 0.34rem;
+					box-sizing: border-box;
+					// align-items: center;
+					padding-top: 0.24rem;
+					color: #fff;
+					font-weight: bold;
+					font-size: 0.297rem;
+					
+				}
+			}
+		}
+	}
 	.RoomTitleBox{
 		padding-left: 0.372rem;
 		padding-top: 0.172rem;
@@ -426,13 +506,13 @@ function onFinish(item) {}
 	.roll-top {
 		width: 710px;
 		margin: auto;
-
+		margin-bottom: 0.148rem;
 		padding-top: 10px;
 		box-sizing: border-box;
 
 		.bag-sort-wrap {
 			width: 100%;
-			height: 70px;
+			height: 0.69rem;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -510,7 +590,7 @@ function onFinish(item) {}
 				align-items: center;
 				border-radius: 6px;
 				border: 2px solid #2d2d67;
-				height: 70px;
+				height: 0.68rem;
 				// margin-left: 20px;
 				box-sizing: border-box;
 

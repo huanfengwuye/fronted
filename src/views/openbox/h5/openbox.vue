@@ -121,7 +121,7 @@
 			</div>
 	
 			<div class="presentation" >
-				<div class="fliter-tab" v-if="tabType == 1">
+				<div class="fliter-tab" v-if="tabType == 1&&false">
 					<p :class="{ active: isAchorDrop }" @click="onClickFilterTab(true)">
 						{{ t('battle.anchor') }}
 					</p>
@@ -149,8 +149,10 @@
 			</div>
 	
 			<H5WeaponListCpt :list="goodsList" v-show="tabType == 0"></H5WeaponListCpt>
+			<H5WeaponListCpt :list="dropData" v-show="tabType == 1"></H5WeaponListCpt>
+
 	
-			<div class="drop-wrap" v-show="tabType == 1">
+			<!-- <div class="drop-wrap" v-show="tabType == 1">
 				<div class="drop-item">
 					<div v-if="!isAchorDrop" class="player">{{ t('battle.member') }}</div>
 					<div v-if="isAchorDrop" class="player">{{ t('battle.anchor') }}</div>
@@ -178,14 +180,12 @@
 						</div>
 						<div class="nickname">{{ item.nickName }}</div>
 					</div>
-					<!-- //boxData.price -->
 					<span class="span_p" :class="{ active: boxData.price < item.price }">
 						<Price :currency="item.price"></Price>
-						<!-- ${{ item.price }} -->
 					</span>
 					<p class="hide">{{ item.goodsName }}</p>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
 		<H5OpenBoxOneAni

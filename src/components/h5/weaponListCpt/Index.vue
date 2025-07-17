@@ -62,6 +62,11 @@ function toactiveIndex(index) {
 		activeIndex.value = index;
 	}
 }
+function getStatus(name) {
+	const str = (name || "").trim().split(' ') || []; // 去除前后空格
+  	const result = str[1]?.replace('(','').replace(')','')||'';
+	return result;
+}
 </script>
 
 <template>
@@ -100,7 +105,7 @@ function toactiveIndex(index) {
 						<!-- <Price size="13" color="#75DC9E" font-weight="700" :currency="item.price"></Price> -->
 						 <div>{{ truncation(item.probability) }}%</div>
 						 {{ item.goodsName.split("|")[1].match(/（.*?）/g)}}
-						<div> {{item.goodsName.split("|")[1]}}</div>
+						<div> {{getStatus(item.goodsName.split("|")[1])}}</div>
 					</div>
 					<div v-if="showBaolv" class="rate" @click="showProbability(index)">
 						{{ truncation(item.probability) }}%
@@ -117,15 +122,15 @@ function toactiveIndex(index) {
 				>
 					{{ item.goodsName }}
 				</div>
-				<div class="weapon-item-name hide" @click.stop="toactiveIndex(index)">
+				<!-- <div class="weapon-item-name hide" @click.stop="toactiveIndex(index)">
 					{{ item.goodsName.split("|")[0] }}
-				</div>
+				</div> -->
 				<div class="weapon-item-wear hide" @click.stop="toactiveIndex(index)">
-					{{ item.goodsName.split("|")[1] }}
+					{{ item.goodsName }}
 				</div>
 				<div
 					class="text"
-					v-if="item.probability"
+					v-if="item.probability&false"
 					:class="{ show: itemIndex == index }"
 				>
 					{{ item.probability }}%
@@ -198,15 +203,18 @@ function toactiveIndex(index) {
 			}
 
 			.weapon-item-wear {
+				position: absolute;
+				bottom: 0.28rem;
+				width: 100%;
 				text-align: center;
 				padding: 0 10px;
-				margin-top: 6px;
+				// margin-top: 6px;
 				box-sizing: border-box;
 				color: #fff;
 
-				line-height: 36px;
+				// line-height: 36px;
 
-				font-size: 26px;
+				font-size: 0.248rem;
 				font-weight: 500;
 			}
 
@@ -241,18 +249,21 @@ function toactiveIndex(index) {
 			}
 
 			.weapon-item-price {
+				position: absolute;
+				top: 0;
 				display: flex;
-				justify-content: center;
-				align-items: center;
-				flex-direction: column;
-				color: #7bdca2;
+				width: 100%;
+				justify-content: space-between;
+				flex-direction: row;
+				color: #fff;
 				// font-weight: 700;
-				font-size: 30px;
-				margin-top: 40px;
-
-				.price {
-					margin-top: 10px;
-				}
+				font-size: 0.248rem;
+				padding: 0 0.248rem;
+				margin-top: 0;
+				box-sizing: border-box;
+				// .price {
+				// 	margin-top: 10px;
+				// }
 			}
 
 			.weapon-info {
@@ -260,9 +271,9 @@ function toactiveIndex(index) {
 				align-items: center;
 				justify-content: space-around;
 				margin-top: 15px;
-
+				position: relative;
 				.weapon-item-price {
-					margin-top: 25px;
+					// margin-top: 25px;
 				}
 
 				.rate {

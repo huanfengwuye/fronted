@@ -7,12 +7,14 @@ export default class H5Header extends Header {}
 </script>
 
 <template>
+	<!-- :class="[{ active: $route.name == 'm_home' }]" -->
+	 <!-- noIndex: route.name != 'm_index_main' -->
 	<div
 		id="top-header"
-		:class="[{ active: $route.name == 'm_home' }]"
+		
 		v-if="store.state.showHeaderView"
 	>
-		<div class="header_top" :class="{ active: indexActive }">
+		<div class="header_top" :class="{ active: indexActive, }">
 			<div class="opt-wrap">
 				<div class="nav-btn" v-if="false">
 					<img
@@ -685,7 +687,9 @@ export default class H5Header extends Header {}
 		left: 0;
 		top: 0;
 		z-index: 190;
-
+		&.noIndex{
+			background: url(@/assets/pcimg/activity/header_bg_2.webp) no-repeat center center/100% 100%;
+		}
 		&.active {
 			z-index: 200;
 		}
