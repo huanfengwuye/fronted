@@ -307,7 +307,7 @@ html,body{
     }
 }
 
-@media (max-width: 480px){
+// @media (max-width: 480px){
  .ScJti{
     --z80px:5rem;
     --z1px:.0625rem;
@@ -402,7 +402,7 @@ html,body{
         }
     }
 }
-}
+// }
 .hidden {
     overflow: hidden;
 }

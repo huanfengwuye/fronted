@@ -677,14 +677,17 @@ export default class H5Header extends Header {}
 		justify-content: space-between;
 		box-sizing: border-box;
 		position: fixed;
-		width: 100%;
+		// width: 100%;
 		height: 124px;
+		width: var(--baseWidth);
+		left: 50%;
+		transform: translateX(-50%);
 		// background: #191c34;
 		opacity: 1;
 		padding-left: 20px;
 		background: url(@/assets/pcimg/activity/bg_top.png) no-repeat center center/100% 100%;
     	// background-size: 100% auto; /* 以宽度为准铺满 */
-		left: 0;
+		// left: 0;
 		top: 0;
 		z-index: 190;
 		&.noIndex{

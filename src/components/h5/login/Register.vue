@@ -152,7 +152,7 @@ async function onPhoneReg(v) {
 		NotifyS(res.message);
 		// onClickSign();
 		onAccountLogin({ account: params.mobile, password: params.password });
-		router.replace("/m/home");
+		router.replace("m/index");
 	}
 }
 

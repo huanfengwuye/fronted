@@ -306,12 +306,12 @@ function onFinish(item) {}
 							/>
 							<img
 								v-else
-								src="@/assets/romimg/roll/roll_detail_logo.png"
+								src="@/assets/pcimg/activity/h5room_icon.png"
 								alt=""
 							/>
 
 							<div class="desc" :class="{ active: item.rollType == 2 }">
-								<!-- {{ item.rollType == 2 ? t('battle.anchor') : t('battle.official') }} -->
+								{{ item.rollType == 2 ? t('battle.anchor') : t('battle.official') }}
 							</div>
 							<div class="roll-name hide">{{ item.rollName }}</div>
 						</div>
@@ -319,9 +319,11 @@ function onFinish(item) {}
 							<img :src="getRollType(item.rollType)" alt="" />
 						</div> -->
 					</div>
-
+					<div class="award-time">
+						{{ t('battle.rewardTime') }}: {{ item.lotteryTime.substring(0, 16) }}
+					</div>
 					<div class="roll-info-wrap">
-						<div class="roll-info">
+						<div class="roll-info" v-if="false">
 							<div class="roll-info-item">
 								<p>{{ t('battle.pricePrize') }}</p>
 								<!-- <p>{{ item.priceNum }}</p> -->
@@ -392,12 +394,10 @@ function onFinish(item) {}
 						</div>
 					</div>
 					<div class="roll-btn-wrap" @click="onClickItem(item)">
-						<span class="icon iconfont">&#xe63c;</span>
+						<!-- <span class="icon iconfont">&#xe63c;</span> -->
 						<span>{{ t('battle.viewRollRoom') }}</span>
 					</div>
-					<div class="award-time">
-						{{ t('battle.rewardTime') }}: {{ item.lotteryTime.substring(0, 16) }}
-					</div>
+					
 				</div>
 			</div>
 		</van-list>
@@ -649,7 +649,8 @@ function onFinish(item) {}
 			//	 padding: 0px 25px;
 
 			border: 1px solid #2d2d67;
-			background: #15172c;
+			// background: #15172c;
+			background: url(@/assets/pcimg/activity/h5rollroom_item_bg.webp) no-repeat center center / 100% 100%;
 			box-shadow: 0px 0px 37.956241607666016px 0.6433261036872864px
 				rgba(41, 34, 139, 0.15) inset;
 
@@ -658,15 +659,15 @@ function onFinish(item) {}
 				width: 100%;
 				.roll-data-top {
 					width: 348px;
-					height: 202px;
-					background: url(@/assets/romimg/roll/roll_item_bg.png) center
-						no-repeat;
+					height:1.69rem;
+					// background: url(@/assets/romimg/roll/roll_item_bg.png) center
+					// 	no-repeat;
 					background-size: cover;
 					text-align: center;
-
+					position: relative;
 					img {
-						width: calc( 96px / 74px * 74px );
-						height: calc( 96px / 74px * 89px );//96px;
+						width: 1rem;
+						height: 1rem;//96px;
 						margin: auto;
 						margin-top: 20px;
 						border-radius: 20px;
@@ -683,26 +684,35 @@ function onFinish(item) {}
 						margin-top: -5px;
 					}
 					.desc {
-						margin: auto;
-						position: relative;
-						width: 68px;
-						top: -24px;
+						position: absolute;
+						left: 50%;
+						top: 9%;
+						transform: translateX(60%);
+						width: 0.44rem;
+						height: 0.59rem;
+						background: url(@/assets/pcimg/activity/h5rollroom_item_type_bg.webp)no-repeat center center / 100% 100%;
+						font-size: 0.198rem;
+						writing-mode: vertical-lr;
 						display: flex;
-						// width: 80px;
-						height: 36px;
-						justify-content: center;
 						align-items: center;
-						color: #fff;
-						text-align: center;
-
-						font-size: 24px;
 						justify-content: center;
-						display: flex;
-						font-style: normal;
-						font-weight: 400;
-						text-transform: uppercase;
-						border-radius: 8px;
-						background: transparent;// #cb8928;
+						color: #ffe2b7;
+						// display: flex;
+						// // width: 80px;
+						// height: 36px;
+						// justify-content: center;
+						// align-items: center;
+						// color: #fff;
+						// text-align: center;
+
+						// font-size: 24px;
+						// justify-content: center;
+						// display: flex;
+						// font-style: normal;
+						// font-weight: 400;
+						// text-transform: uppercase;
+						// border-radius: 8px;
+						// background: transparent;// #cb8928;
 						// &.active {
 						// 	background: #7349ca;
 						// }
@@ -730,13 +740,14 @@ function onFinish(item) {}
 				width: 348px;
 				margin-top: 14px;
 				box-sizing: border-box;
-
+				padding: 0 0.425rem;
 				.roll-info {
 					display: flex;
 					align-items: center;
 					justify-content: space-around;
 					box-sizing: border-box;
 					.roll-info-item {
+						
 						display: flex;
 						align-items: center;
 						flex-direction: column;
@@ -795,26 +806,40 @@ function onFinish(item) {}
 				}
 
 				.goods-list {
-					display: flex;
+					// display: flex;
 					align-items: center;
 					justify-content: space-between;
 					width: 100%;
-					padding: 0 25px;
+					
 					box-sizing: border-box;
 					overflow: hidden;
 					white-space: nowrap;
 					margin-top: 4px;
-					height: 108px;
-
+					height: 2.40rem;
+					position: relative;
 					.goods-item {
 						display: inline-block;
-						position: relative;
+						right: 0;
 						background-size: cover;
 						background-repeat: no-repeat;
 						background-position: center;
-						margin: auto 5px;
-						width: 104px;
-						height: 108px;
+						// margin: auto 5px;
+						width: 1.11rem;
+						height: 1.11rem;
+						flex-shrink: 0;
+						position: relative;
+						&:first-child{
+							width: 2.40rem;
+							height: 2.40rem;
+						}
+						&:nth-child(2){
+							position: absolute;
+							top: 0;
+						}
+						&:nth-child(3){
+							position: absolute;
+							bottom: 0;
+						}
 						// background: url(@/assets/romimg/roll/box_bg.png) center no-repeat;
 						// background-size: 85px 95px;
 						img {
@@ -875,7 +900,7 @@ function onFinish(item) {}
 			}
 
 			.roll-btn-wrap {
-				// margin-top: 4px;
+				margin-top: 0.49rem;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -883,14 +908,15 @@ function onFinish(item) {}
 				// width: 310px;
 				// height: 57px;
 
-				width: 325px;
-				height: 90px;
+				width: 2.11rem;
+				height: 0.57rem;
 
-				font-size: 24px;
-				font-weight: 700;
+				font-size: 0.32rem;
+				// font-weight: 700;
 				color: #fff;
 				border-radius: 6px;
-				background: #4b56bc;
+				// background: #4b56bc;
+				background: url(@/assets/pcimg/activity/openbox_openBtn_bg.webp) no-repeat center center / 100% 100%;
 
 				span:first-child {
 					margin-right: 5px;

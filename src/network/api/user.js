@@ -111,11 +111,11 @@ export function goodsRecords(data) {
 
 // 用户炼化物品
 export function recoveryGoods(data) {
-	// return axios({
-	// 	url: '/api/user/recoveryGoods',
-	// 	method: 'post',
-	// 	data
-	// })
+	return axios({
+		url: '/api/user/recoveryGoods',
+		method: 'post',
+		data
+	})
 }
 
 // 用户背包内的物品

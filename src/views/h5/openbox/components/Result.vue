@@ -7,6 +7,7 @@ import { GoodImageBgType } from "@/util/util";
 import { playAudio } from "@/util/common";
 import audioshow from "@/assets/audio/show.mp3";
 import audiorecory from "@/assets/audio/recory.mp3";
+import { recoveryGoods } from "@/network/api/user";
 import { useStore } from "vuex";
 const props = defineProps([
 	"goodsList",
@@ -126,7 +127,18 @@ function onClose() {
 		ammunitionShow.value = false;
 	}, 300);
 }
-
+function onBreakDown(datalist){
+	console.log(datalist,'datalist')
+	let params = {
+		goodsIds: datalist.map(v=>v.goodsId)
+	}
+	recoveryGoods(params).then(res=>{
+		Success({
+			message: res.message
+		});
+		onClose()
+	})
+}
 function getImageBg(item) {
 	if (item) {
 		return store.getters.getGoodsBgImage(
@@ -322,6 +334,7 @@ const getGoodsNameSec = (name, type = 1) => {
 
 			<div class="result-btns" :class="{ one: goodList.length == 1 }">
 				<p @click="onClose">{{t('openbox.putInBag')}}</p>
+				<p @click="onBreakDown(goodList)">{{ '分解' }}</p>
 			</div>
 		</div>
 	</div>
@@ -804,7 +817,7 @@ const getGoodsNameSec = (name, type = 1) => {
 				font-weight: bold;
 				text-align: center;
 				line-height: 108px;
-				// margin-right: 30px;
+				margin-right: 30px;
 				border-radius: 8px;
 				background: #3a34b0;
 			}

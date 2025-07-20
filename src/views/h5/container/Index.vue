@@ -78,7 +78,7 @@ watch(route, (newRoute, oldRoute) => {
 	<div id="container">
 		<div v-if="showBrowserTip" class="wechat"></div>
 		<Header/>
-		<RecordSwiper v-if="showRecordSwiper" />
+		<RecordSwiper v-if="showRecordSwiper&&false" />
 		<router-view/>
 		<!-- <Footer/> -->
 		<introduce/>
@@ -111,10 +111,11 @@ watch(route, (newRoute, oldRoute) => {
 	// background: url('@/assets/romimg/spring/bg.png') no-repeat center top, #270204;
 
 	// background-size: 100%;
+	--baseWidth: 750px;
 	background-color: #15172c;
 	width: 750px;
 	position: relative;
-
+	margin: 0% auto;
 	.wechat
 	{
 		position: fixed;

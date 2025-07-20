@@ -48,7 +48,7 @@
 		<div class="box-back">
 			<div
 				class="box-pic"
-				
+				:style="'background-image: url(' + boxData.imageUrl + ')'"
 			>
 			<!-- :style="'background-image: url(' + boxData.imageUrl + ')'" -->
 				<img :src="boxData.weaponImageUrl" :alt="boxData.name" />
@@ -83,11 +83,11 @@
 			</div>
 			<div class="open-btn open" v-if="doingAnimation">
 				OPENING
-				<img
+				<!-- <img
 					class="loader-img"
 					src="@/assets/pcimg/openbox/loader.png"
 					alt=""
-				/>
+				/> -->
 			</div>
 		</div>
 		<div class="box_info">
@@ -131,7 +131,7 @@
 				</div>
 				<div
 					class="probability_main"
-					v-if="tabType == 0&&false"
+					v-if="tabType == 0"
 					:class="{
 						len5: rarityList.filter((el) => el.probability > 0).length >= 5,
 					}"
@@ -326,7 +326,7 @@
 	.box-back {
 		width: 750px;
 		height: 542px;
-		background: url(@/assets/pcimg/activity/h5openbox_item_bg2.webp) no-repeat center;
+		// background: url(@/assets/pcimg/activity/h5openbox_item_bg2.webp) no-repeat center;
 		background-size: 100% 100%;
 		margin: -60px auto 0;
 		.box-pic {
@@ -339,7 +339,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			background-image: url(@/assets/pcimg/activity/h5openbox_item_bg.webp);
+			// background-image: url(@/assets/pcimg/activity/h5openbox_item_bg.webp);
 			img {
 				width: 6.65rem;
 				max-width: 100%;

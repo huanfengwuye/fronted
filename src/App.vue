@@ -177,7 +177,7 @@ function viewChangeListener() {
 	window.$dev && console.log( isPC )
 	store.commit("setPCClient", isPC);
 
-	let params = isPC && route.path.startsWith("/m/") ? { path : '/p/home' } : { path : '/m/home' }
+	let params = isPC && route.path.startsWith("/m/") ? { path : '/p/home' } : { path : 'm/index' }
 	if( route.query.code )
 		params.query = { code : route.query.code }
 
@@ -273,14 +273,19 @@ Date.prototype.format = function (fmt) {
 </script>
 
 <template>
-	<div :class="store.state.isPCClient ? 'pc-root' : 'root'">
+	<div :class="store.state.isPCClient ? 'pc-root' : 'root'" class="main">
 		<div id="fire-container" v-show="showFire"></div>
 		<router-view v-if="isRouterAlive" />
 	</div>
 </template>
 
 <style lang="scss">
-
+.main{
+	background: url(@/assets/pcimg/activity/bg01.png) no-repeat center center / 100%;
+	background-size: cover;
+	height: 100vh;
+	overflow: auto;
+}
 .pc-root {
 	width: 100%;
 	overflow-x: hidden;

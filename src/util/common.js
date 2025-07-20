@@ -333,7 +333,8 @@ export const getGoodsNameSec = (name,type=1) => {
 
 export const isPCFunc = () => {
 	// return getDeviceType() == DeviceType.pc && window.innerWidth >= 1024;
-	return	window.innerWidth >= 1024;
+	// return	window.innerWidth >= 1024;
+	return	false;
 }
 
 

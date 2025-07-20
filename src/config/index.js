@@ -4,8 +4,9 @@ import { DeviceType } from "@/util/util";
 //pnpm run build 正式包
 // pnpm run staging 测试包
 ///	开发服
-export const url = import.meta.env.MODE === 'development' || import.meta.env.MODE === 'staging' ? 'https://api.mskins.cn' : "https://api.mskins.cn";
-export const wsurl = import.meta.env.MODE === 'development' || import.meta.env.MODE === 'staging' ? 'wss://api.mskins.cn/gate' : "wss://api.mskins.cn/gate";
+export const url = import.meta.env.MODE === 'development' || import.meta.env.MODE === 'staging' ? 'https://www.168mskins.com' : "https://www.168mskins.com";
+export const wsurl = import.meta.env.MODE === 'development' || import.meta.env.MODE === 'staging' ? 'wss://www.168mskins.com/gate' : "wss://www.168mskins.com/gate";
+
 
 //设备类型  0.默认 1.pc 2.h5 3.android 4.ios
 export const runDeviceType = DeviceType.h5;

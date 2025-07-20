@@ -4,7 +4,7 @@ import information from "@/views/h5/information/Index.vue";
 import spreadUser from "@/views/h5/spreadUser/Index.vue";
 import record from "@/views/h5/record/Index.vue";
 import bag from "@/views/h5/bag/Index.vue";
-
+import defaultIcon from '@/assets/romimg/common/defaultIcon.png'
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { getVipLevelList } from "@/network/api/user";
@@ -16,6 +16,8 @@ const t = i18n.global.t
 const store = useStore();
 const router = useRouter();
 const userInfoBase = computed(() => store.state.userInfoBase);
+const userInfoAssets = computed(() => store.state.userInfoAssets);
+console.log(userInfoBase.value,userInfoAssets.value,'userInfoBase')
 const noReadMessages = computed(() => store.state.noReadMessages);
 const userInfoExt = computed(() => store.state.userInfoExt);
 const hasLogin = computed(() => store.getters.hasLogin)
@@ -130,7 +132,77 @@ function goToEdit(type) {
 
 <template>
 	<div id="personal" @click="editHeadType = false">
-		<TopTitleBack :title="t('router.userCenter')"></TopTitleBack>
+		<!-- <TopTitleBack :title="t('router.userCenter')"></TopTitleBack> -->
+		 <div class="user_Box">
+			<div class="user-info-wrap"> 
+				<div class="userHeadBalanceBtn flex flex-column align-items-center">
+					<div class="userHeadBox relative">
+						<div class="userHead relative flex flex-xy-center">
+							<img :src="userInfoBase.avater || defaultIcon" class="userHeadImg radius50">
+							<img src="@/assets/pcimg/activity/h5userHeadBc-bg.png" class="userHeadBc absolute w100 h100">
+						</div>
+						<img src="@/assets/pcimg/activity/h5userupload.webp" class="cameraIcon absolute">
+					</div>
+					<div class="balance">余额: <span>{{userInfoAssets.amount}}</span></div>
+					<div class="rechargeBtn flex flex-xy-center">
+						<img src="@/assets/pcimg/activity/h5purse_icon.webp">
+						<div class="font22 white hongLei mt5">充值</div>
+					</div>
+				</div>
+			</div>
+			<div class="userInfoBox">
+				<div class="userInfo w100 h100">
+					<div class="title">基础信息</div>
+					<div class="w100 infoList flex flex-column mt5">
+						<div class="w100 infoItem flex">
+							<div class="label w1">昵称</div>	``
+							<div class="valueIcon flex align-items-center justify-content-between">
+								<div class="value">{{userInfoBase.nickName}}</div>
+								<img src="@/assets/pcimg/activity/h5user_edit.webp">
+							</div>
+						</div>
+						<div class="line"></div>
+						<div class="w100 infoItem flex">
+							<div class="label">ID</div>
+							<div class="valueIcon flex align-items-center justify-content-between">
+								<div class="value">{{store.state.userId}}</div>
+								<img src="@/assets/pcimg/activity/h5user_copy.webp">
+							</div>
+						</div>
+						<div class="line">
+
+						</div>
+						<div class="w100 infoItem flex">
+							<div class="label">登录账号</div>
+							<div class="valueIcon flex align-items-center justify-content-between">
+								<div class="value">{{userInfoBase.account}}</div>
+							</div>
+						</div>
+						<!-- <div class="line"></div>
+						<div class="w100 infoItem flex">
+							<div class="label">消息提示</div>
+							<div class="valueIcon flex align-items-center justify-content-between">
+								<div class="value">
+									<div class="adm-switch adm-switch-checked" role="switch" aria-label="开关" aria-checked="true" aria-disabled="false" style="--checked-color: #B6462A; --height: var(--z12px); --width: var(--z29px);">
+										<div class="adm-switch-checkbox">
+											<div class="adm-switch-handle"></div>
+											<div class="adm-switch-inner"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div> -->
+						<div class="line"></div>
+						<div class="w100 infoItem flex">
+							<div class="label">上级邀请码</div>
+							<div class="valueIcon flex align-items-center justify-content-between">
+								<div class="value"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		 </div>
 		<div class="user-info" @click="goToInfo()">
 			<div class="avatar-wrap">
 				<div class="avatar-wrap2">
@@ -205,9 +277,135 @@ function goToEdit(type) {
 	//	 margin: 50px 0px;
 	min-height: 23px;
 	width: 750px;
-	//	 background: url(@/assets/romimg/personal/bg.png) no-repeat center;
+	background: url(@/assets/pcimg/activity/userHome-bg.webp) no-repeat center center / 100% 100%;
 	//	 background-size: contain;
-
+    height: calc(100vh - 1.68rem);
+	overflow: auto;
+	.user_Box{
+		height: 8.43rem;
+		display: flex;
+		div{
+			box-sizing: border-box;
+		}
+		.user-info-wrap{
+			width: 4.466rem;
+			.userHeadBalanceBtn {
+				display: flex;
+				flex-direction: column;
+				height: 100%;
+				background-image: url(@/assets/pcimg/activity/h5top_left-bg.png);
+				background-size: 100% 100%;
+				row-gap: 0.124rem;
+				padding-top: 1.985rem;
+				align-items: center;
+				.userHeadBox{
+					position: relative;
+					width: 2.208rem;
+					height: 2.208rem;
+					.userHead {
+						position: relative;
+						display: flex;
+						align-items: center;
+						width: 2.208rem;
+						height: 2.084rem;
+						align-items: center;
+						justify-content: center;
+						.userHeadImg{
+							width: 1.662rem;
+							height: 1.662rem;
+							border-radius: 50%;
+						}
+						.userHeadBc{
+							width: 100%;
+							height: 100%;
+							position: absolute;
+							top: 0;
+							left: 0;
+						}
+					}
+					.cameraIcon{
+						position: absolute;
+						width: 0.521rem;
+						height: 0.421rem;
+						left: 50%;
+						bottom: -0.124rem;
+						transform: translateX(-50%);
+					}
+				}
+				.balance{
+					font-size: 0.372rem;
+    				color: rgb(255, 255, 255);
+				}
+				.rechargeBtn{
+					width: 2.63rem;
+					height: 0.967rem;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background: url(@/assets/pcimg/activity/openbox_openBtn_bg.webp) no-repeat center center / 100% 100%;
+					img{
+						width: 0.669rem;
+						height: 0.669rem;
+					}
+					div{
+						font-family: Honglei;
+						color: #fff;
+						font-size: 0.545rem;
+					}
+				}
+			}
+		}
+		.userInfoBox{
+			    flex: 1 1 0%;
+				height: 5.459rem;
+				padding: 0.124rem 0.198rem;
+				background-image: url(@/assets/pcimg/activity/h5top_right-bg.png);
+				background-size: 100% 100%;
+				background-repeat: no-repeat;
+				transform: translate(-0.421rem, 1.439rem);
+				.userInfo {
+					.title{
+						font-size: 0.421rem;
+						font-weight: bold;
+						color: rgb(234, 230, 225);
+						-webkit-text-stroke: var(--z02px) #714900;
+						margin: 0;
+					}
+					.infoList{
+						padding-left: 0.198rem;
+    					row-gap: 0.198rem;
+						.infoItem {
+							.label{
+								    font-weight: bold;
+									font-size: 0.347rem;
+									color: rgb(234, 230, 225);
+									width: 1.985rem;
+								&.w1 {
+									width: 0.992rem;
+								}
+							}
+							.valueIcon{
+								flex: 1 1 0%;
+								font-size: 0.347rem;
+								color: rgb(180, 165, 159);
+								img{
+									width: 0.446rem;
+    								height: 0.446rem;
+								}
+							}
+							
+							
+						}
+						.line{
+							width: 100%;
+							height: .0248rem;
+							background-color: #333333;
+							border-bottom: .0248rem dashed #B4A59F;
+						}
+					}
+				}
+		}
+	}
 	.user-info {
 		display: flex;
 		align-items: center;
@@ -686,6 +884,41 @@ function goToEdit(type) {
 			opacity: 1;
 			z-index: 202;
 		}
+	}
+	.h100 {
+    height: 100%;
+	}
+	.w100 {
+		width: 100%;
+	}
+	.mt5 {
+    margin-top: .124rem;
+	}
+	.flex-column {
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column;
+	}
+	.flex {
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+	}
+	.align-items-center {
+		-webkit-box-align: center;
+		-webkit-align-items: center;
+		-ms-flex-align: center;
+		align-items: center;
+	}
+
+	.justify-content-between {
+		-webkit-box-pack: justify;
+		-webkit-justify-content: space-between;
+		-ms-flex-pack: justify;
+		justify-content: space-between;
 	}
 }
 </style>

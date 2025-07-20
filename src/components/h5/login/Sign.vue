@@ -125,7 +125,7 @@ async function onAccountLogin(v) {
 			localStorage.removeItem("returnURL");
 			router.replace(returnURL);
 		} else if (route.query.type == "forgetpw") {
-			router.replace("/m/home");
+			router.replace("/m/index");
 		} else {
 			router.go(-1);
 		}
@@ -152,7 +152,7 @@ async function onPhoneLogin(v) {
 		NotifyS(res.message);
 		onLoginSuc(res.data);
 		if (route.query.type == "forgetpw") {
-			router.replace("/m/home");
+			router.replace("/m/index");
 		} else {
 			router.go(-1);
 		}

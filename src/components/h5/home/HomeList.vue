@@ -268,7 +268,7 @@ onMounted(() => {
 				</div> -->
 				<div
 					class="item-pic"
-					
+					 :style="'background-image: url(' + value.imageUrl + ');'"
 				>
 				<!-- :style="'background-image: url(' + value.imageUrl + ');'" -->
 					<img :src="value.weaponImageUrl" :alt="value.name" />
@@ -717,7 +717,7 @@ onMounted(() => {
 				background-size: cover;
 				background-repeat: no-repeat;
 				z-index: 3 !important;
-				background: url(@/assets/pcimg/activity/h5box_bg.png) no-repeat center center / 100% 100%;
+				// background: url(@/assets/pcimg/activity/h5box_bg.png) no-repeat center center / 100% 100%;
 				img {
 				width: 296px;
 				height: auto;

@@ -15,7 +15,7 @@ import nav_wf_active from '@/assets/pcimg/activity/nav_wf_active.png'
 import nav_fl from '@/assets/pcimg/activity/nav_fl.png'
 import nav_fl_active from '@/assets/pcimg/activity/nav_fl_active.png'
 import nav_my from '@/assets/pcimg/activity/nav_my.png'
-// import nav_my_active from '@/assets/pcimg/activity/nav_my_active.png'
+import nav_my_active from '@/assets/pcimg/activity/nav_my_active.png'
 // import wv from '@/util/webview'
 
 
@@ -51,7 +51,7 @@ const navaBarList = ref([
 		name: '我的',
 		path: '/m/personal',
 		icon: nav_my,
-		icon_active:nav_my,
+		icon_active:nav_my_active,
 
 	}
 ])
@@ -78,7 +78,9 @@ const active = computed(() => {
 	width: 100%;
 	#navaBar{
 		height: 1.48rem;
-		width: 100%;
+		width: var(--baseWidth);
+		left: 50%;
+		transform: translateX(-50%);
 		position: fixed;
 		bottom: 0;
 		background: url(@/assets/pcimg/activity/navbar_bg.webp) no-repeat center center / 100% 100%;

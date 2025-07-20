@@ -44,7 +44,7 @@ onMounted(() => {
 	}
 
 	if (!isPCFunc()) {
-		let params = { path: "/m/home" };
+		let params = { path: "/m/index" };
 		if (route.query.code) {
 			params.query = { code: route.query.code };
 		}
